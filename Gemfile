@@ -11,6 +11,7 @@ gem "pg", "~> 1.1"
 # Use Puma as the app server
 gem "puma", "~> 5.0"
 gem "graphql"
+gem "aws-sdk"
 gem "standard", group: [:development, :test]
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 # gem 'jbuilder', '~> 2.7'
