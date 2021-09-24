@@ -3,7 +3,7 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 ruby "3.0.0"
 # faker
-gem 'faker', :git => 'https://github.com/faker-ruby/faker.git', :branch => 'master'
+gem "faker", git: "https://github.com/faker-ruby/faker.git", branch: "master"
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails', branch: 'main'
 gem "rails", "~> 6.1.4", ">= 6.1.4.1"
 # Use postgresql as the database for Active Record
@@ -19,7 +19,7 @@ gem "standard", group: [:development, :test]
 # Use Active Model has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 # debuger
-gem 'pry', '~> 0.13.1'
+gem "pry", "~> 0.13.1"
 # Use Active Storage variant
 # gem 'image_processing', '~> 1.2'
 
@@ -32,7 +32,7 @@ gem "bootsnap", ">= 1.4.4", require: false
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem "byebug", platforms: [:mri, :mingw, :x64_mingw]
-  gem 'rspec-rails', '~> 5.0.0'
+  gem "rspec-rails", "~> 5.0.0"
 end
 
 group :development do
