@@ -1,6 +1,6 @@
 require "securerandom"
 class RoutesController < ApplicationController
-  def index
+  def add
     name = SecureRandom.uuid
     color = params[:color]
     route_setter = params[:route_setter]
