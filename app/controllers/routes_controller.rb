@@ -1,6 +1,23 @@
 require "securerandom"
 class RoutesController < ApplicationController
+
   def index
+    params[:filtering] = eval(params[:filtering])
+    color ||= params[:filtering][:color] 
+    route_setter ||= params[:filtering][:route_setter]
+    routes = Route.all
+
+    if(color != nil)
+      routes = Route.all.where(color: color)
+    end
+
+    if(route_setter != nil)
+        routes = routes.where(route_setter: route_setter)
+    end
+    render json: routes
+  end
+
+  def add
     name = SecureRandom.uuid
     color = params[:color]
     route_setter = params[:route_setter]
