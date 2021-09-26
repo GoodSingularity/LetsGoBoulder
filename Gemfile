@@ -13,7 +13,7 @@ gem "puma", "~> 5.0"
 gem "pg_search"
 gem "graphql"
 gem "aws-sdk"
-gem 'apollo_upload_server', '2.1.0'
+gem "apollo_upload_server", "2.1.0"
 gem "standard", group: [:development, :test]
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 # gem 'jbuilder', '~> 2.7'
