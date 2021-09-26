@@ -2,10 +2,27 @@ module Mutations
     class CreateRouteMutation < BaseMutation
       argument :color, Integer, required: true
       argument :route_setter, String, required: true
+      argument :file, ApolloUploadServer::Upload, required: true
 
       def resolve(**args)
-        route = Route.create(name: SecureRandom.uuid, color: args[:color], route_setter: args[:route_setter], files: [])
+        file_key = SecureRandom.uuid
+        put_file(key: file_key, file: args[:file])
+        route = Route.create(name: SecureRandom.uuid, color: args[:color], route_setter: args[:route_setter], files: [file_key])
         {status: 200}
+      end
+
+      private
+      
+      def put_file(key:, file:)
+        config = {
+          key: key,
+          bucket: "routes"
+        }
+        $s3.put_object(
+          key: config[:key],
+          body: file.tempfile.read,
+          bucket: config[:bucket]
+        )
       end
     end
 end
