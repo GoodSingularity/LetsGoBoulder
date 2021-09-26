@@ -4,4 +4,12 @@ class Route < ApplicationRecord
   validates :route_setter, presence: true
   include PgSearch::Model
   pg_search_scope :search, against: [:color, :name, :route_setter]
+
+  scope :filter_by_route_setter, -> {
+    order(arel_table['route_setter'].lower.desc)
+  }
+
+  scope :filter_by_color, -> {
+    order(arel_table['route_setter'].lower.desc)
+  }
 end
