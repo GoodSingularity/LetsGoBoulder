@@ -19,6 +19,7 @@ module Resolvers
                 name
                 routeSetter
                 color
+                status
                 }
             }
         GQL
