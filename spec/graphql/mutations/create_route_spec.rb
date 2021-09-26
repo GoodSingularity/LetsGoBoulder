@@ -4,7 +4,7 @@ module Mutations
   module Routes
     RSpec.describe CreateRouteMutation, type: :request do
 
-      describe '.mutation passed' do
+      describe '.mutation passes' do
         
         it 'create route' do
             file = file_fixture("image.jpg")
