@@ -3,21 +3,33 @@ require 'rails_helper'
 module Mutations
   module Routes
     RSpec.describe CreateRouteMutation, type: :request do
+      let(:variables) do
+        {  'routeSetter': "Kacper", 'color':1, 'file': fixture_file_upload(Rails.root.join('spec', 'fixtures', 'files', 'image.jpg'), 'image/jpg') }
+      end
+
+      let(:params) do
+        {
+          'operations' => {
+            'query' => query,
+            'variables' => variables
+          }.to_json,
+          'map' => { '1' => ['variables.file'] }.to_json,
+          '1' => variables[:file]
+        }
+     end
 
       describe '.mutation passes' do
         
-        it 'create route' do
-            file = file_fixture("image.jpg")
-            result = FBoulderSchema.execute(query, variables: {color: 1, routeSetter: "Andrzej", file: file})
-            size = Route.where(route_setter: "Andrzej", color: 1).size
-            expect(size).to eq(1)
+        it 'returns a true' do
+          post '/graphql', params: params
+          expect(JSON.parse(response.body)['data']['createRoute']['clientMutationId']).to eq nil
         end
       end
 
       def query
         <<~GQL
-        mutation($color: Int!, $routeSetter: String!, $somefile: Upload!){
-          createRoute(input: {color: $color, routeSetter: $routeSetter, file: $somefile}){
+        mutation($color: Int!, $routeSetter: String!, $file: Upload!){
+          createRoute(input: {color: $color, routeSetter: $routeSetter, file: $file}){
             clientMutationId
           }
         }
