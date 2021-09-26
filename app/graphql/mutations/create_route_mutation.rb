@@ -3,6 +3,7 @@ module Mutations
       argument :color, Integer, required: true
       argument :route_setter, String, required: true
       argument :file, ApolloUploadServer::Upload, required: true
+      field :status, Int, null: false
 
       def resolve(**args)
         file_key = SecureRandom.uuid

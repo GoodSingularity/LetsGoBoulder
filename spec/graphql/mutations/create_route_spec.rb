@@ -22,7 +22,7 @@ module Mutations
         
         it 'returns a true' do
           post '/graphql', params: params
-          expect(JSON.parse(response.body)['data']['createRoute']['clientMutationId']).to eq nil
+          expect(JSON.parse(response.body)['data']['createRoute']['status']).to eq 200
         end
       end
 
@@ -31,6 +31,7 @@ module Mutations
         mutation($color: Int!, $routeSetter: String!, $file: Upload!){
           createRoute(input: {color: $color, routeSetter: $routeSetter, file: $file}){
             clientMutationId
+            status
           }
         }
         GQL
