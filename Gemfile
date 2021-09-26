@@ -10,6 +10,7 @@ gem "rails", "~> 6.1.4", ">= 6.1.4.1"
 gem "pg", "~> 1.1"
 # Use Puma as the app server
 gem "puma", "~> 5.0"
+gem 'pg_search'
 gem "graphql"
 gem "aws-sdk"
 gem "standard", group: [:development, :test]
