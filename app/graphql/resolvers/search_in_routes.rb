@@ -10,7 +10,7 @@ module Resolvers
       if %w[black blue green orange yellow white].include? search.downcase
         search = return_color_id(search)
       end
-      route = Route.search(search)
+      context[:current_user] ==  nil ? (raise GraphQL::ExecutionError, "Authentication Error") : Route.search(search)
     rescue ActiveRecord::RecordNotFound => error
       raise GraphQL::ExecutionError, error.message
     end

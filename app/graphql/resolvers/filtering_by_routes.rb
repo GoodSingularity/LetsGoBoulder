@@ -11,7 +11,9 @@ module Resolvers
       route_setter ||= args[:route_setter]
       routes = Route.all
   
-      filtering_routes(routes: routes, color: color, route_setter: route_setter)
+
+      context[:current_user] ==  nil ? (raise GraphQL::ExecutionError, "Authentication Error") : filtering_routes(routes: routes, color: color, route_setter: route_setter)
+
     rescue ActiveRecord::RecordNotFound => error
       raise GraphQL::ExecutionError, error.message
     end

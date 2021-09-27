@@ -8,7 +8,7 @@ module Mutations
       def resolve(**args)
         file_key = SecureRandom.uuid
         put_file(key: file_key, file: args[:file])
-        route = Route.create(name: SecureRandom.uuid, color: args[:color], route_setter: args[:route_setter], files: [file_key], status: true)
+        context[:current_user] ==  nil ? (raise GraphQL::ExecutionError, "Authentication Error") : Route.create(name: SecureRandom.uuid, color: args[:color], route_setter: args[:route_setter], files: [file_key], status: true)
         {status: 200}
       end
 

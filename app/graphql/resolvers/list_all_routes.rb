@@ -5,7 +5,7 @@ module Resolvers
     type [Types::RouteType], null: false
 
     def resolve
-      Route.all
+       context[:current_user] ==  nil ? (raise GraphQL::ExecutionError, "Authentication Error") : Route.all
     rescue ActiveRecord::RecordNotFound => error
       raise GraphQL::ExecutionError, error.message
     end
