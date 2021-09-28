@@ -50,11 +50,11 @@ class GraphqlController < ApplicationController
 
   def current_user
     # if we want to change the sign-in strategy, this is the place to do it
-    return unless request.headers['Authorization']
+    return unless request.headers["Authorization"]
     crypt = ActiveSupport::MessageEncryptor.new(Rails.application.credentials.secret_key_base.byteslice(0..31))
-    tk =request.headers['Authorization']
+    tk = request.headers["Authorization"]
     token = crypt.decrypt_and_verify tk
-    user_id = token.gsub('user-id:', '').to_i
+    user_id = token.gsub("user-id:", "").to_i
     user ||= User.find user_id
   rescue ActiveSupport::MessageVerifier::InvalidSignature
     nil

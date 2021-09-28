@@ -3,7 +3,7 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 ruby "3.0.0"
 # faker
-gem 'bcrypt', '~> 3.1.13'
+gem "bcrypt", "~> 3.1.13"
 gem "faker", git: "https://github.com/faker-ruby/faker.git", branch: "master"
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails', branch: 'main'
 gem "rails", "~> 6.1.4", ">= 6.1.4.1"

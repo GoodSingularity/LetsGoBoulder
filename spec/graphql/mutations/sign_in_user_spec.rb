@@ -1,43 +1,56 @@
-require 'rails_helper'
+require "rails_helper"
 
-class Mutations::SignInUserTest < ActiveSupport::TestCase
-  def perform(args = {})
-    Mutations::SignInUser.new(object: nil, field: nil, context: { session: {} }).resolve(args)
-  end
+module Mutations
+  module SignInUser
 
-  def create_user
-    User.create!(
-      name: 'Test User',
-      email: 'email@example.com',
-      password: '[omitted]',
-    )
-  end
+    RSpec.describe CreateRouteMutation, type: :request do
+      describe "check how mutation works" do
+        describe ".mutation passes" do
+          let(:user){
+            User.create!(
+            name: "Test User",
+            email: Faker::Internet.email,
+            password: "[omitted]"
+            )
+          }
 
-  test 'success' do
-    user = create_user
+          let(:result){
+            Mutations::SignInUserMutation.new(object: nil, field: nil, context: {session: {}}).resolve(credentials: {
+                email: user.email,
+                password: user.password
+              }
+            )
+          }
+          it ".mutation does pass succesful" do
+            expect(result[:token].present?)
+            assert_equal result[:user], user
+          end
+        end
+        describe ".mutation failes" do
+          let(:user){
+            User.create!(
+            name: "Test User",
+            email: Faker::Internet.email,
+            password: "[omitted]"
+            )
+          }
+          it ".mutation does not pass, no credentials" do
+            not_loged_in = Mutations::SignInUserMutation.new(object: nil, field: nil, context: {session: {}}).resolve(credentials: {})
 
-    result = perform(
-      credentials: {
-        email: user.email,
-        password: user.password
-      }
-    )
+            assert_nil not_loged_in
+          end
 
-    assert result[:token].present?
-    assert_equal result[:user], user
-  end
+          it "failure because wrong email" do
+            not_loged_in = Mutations::SignInUserMutation.new(object: nil, field: nil, context: {session: {}}).resolve(credentials: { email: "wrong"})
+            assert_nil not_loged_in
+          end
 
-  test 'failure because no credentials' do
-    assert_nil perform
-  end
-
-  test 'failure because wrong email' do
-    create_user
-    assert_nil perform(credentials: { email: 'wrong' })
-  end
-
-  test 'failure because wrong password' do
-    user = create_user
-    assert_nil perform(credentials: { email: user.email, password: 'wrong' })
+          it "failure because wrong password" do
+            not_loged_in = Mutations::SignInUserMutation.new(object: nil, field: nil, context: {session: {}}).resolve(credentials: { email: user.email, password: "wrong"})
+            assert_nil not_loged_in
+          end
+        end
+      end
+    end
   end
 end
