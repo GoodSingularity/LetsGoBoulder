@@ -1,13 +1,13 @@
 module Mutations
     class UpdateRouteMutation < BaseMutation
-      argument :name, UID, required: true
-      argument :color, String, required: false
+      argument :id, String, required: true
+      argument :color, Integer, required: false
       argument :status, Boolean, required: false
 
       field :status, Boolean, null: false
 
       def resolve(**args)
-        route = Route.where(name: args[:name])
+        route = Route.where(name: args[:id])
         update(route, color: args[:color], status: args[:status])
         {status: 200}
       end
