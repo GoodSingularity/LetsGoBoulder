@@ -4,14 +4,14 @@ module Resolvers
   module Routes
     RSpec.describe ListAllRoutes, type: :request do
       describe ".resolve" do
-        let(:user){
+        let(:user) {
           User.create!(
             name: "test",
             email: "test@test.com",
             password: "test"
           )
         }
-        let(:context){
+        let(:context) {
           ctx = {
             current_user: user
           }

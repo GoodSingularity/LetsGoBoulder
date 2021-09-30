@@ -4,14 +4,14 @@ module Resolvers
   module Routes
     RSpec.describe FilteringByRoutes, type: :request do
       describe ".resolve" do
-        let(:user){
+        let(:user) {
           User.create!(
             name: "test",
             email: "test@test.com",
             password: "test"
           )
         }
-        let(:context){
+        let(:context) {
           ctx = {
             current_user: user
           }
@@ -27,7 +27,7 @@ module Resolvers
         end
 
         it "none found in filtering by routes" do
-          result = FBoulderSchema.execute(query, variables: {color: 0, routeSetter: "Andrzej"}, context:context)
+          result = FBoulderSchema.execute(query, variables: {color: 0, routeSetter: "Andrzej"}, context: context)
           size = result["data"]["filteringByRoutes"].size
           expect(size).to eq(0)
         end

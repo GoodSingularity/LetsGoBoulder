@@ -6,7 +6,7 @@ class Mutations::CreateUserTest < ActiveSupport::TestCase
   end
 
   test "create new user" do
-    let(:email){
+    let(:email) {
       Faker::Internet.email
     }
     user = perform(
