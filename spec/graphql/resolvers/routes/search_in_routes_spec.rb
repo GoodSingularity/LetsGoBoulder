@@ -3,15 +3,14 @@ require "rails_helper"
 module Resolvers
   module Routes
     RSpec.describe SearchInRoutes, type: :request do
-
-      let(:user){
+      let(:user) {
         User.create!(
           name: "test",
           email: "test@test.com",
           password: "test"
         )
       }
-      let(:context){
+      let(:context) {
         ctx = {
           current_user: user
         }

@@ -2,22 +2,20 @@ require "rails_helper"
 
 module Mutations
   module Routes
-    
     RSpec.describe CreateRouteMutation, type: :request do
-      
       let(:variables) do
         {routeSetter: "Kacper", color: 1, file: fixture_file_upload(Rails.root.join("spec", "fixtures", "files", "image.jpg"), "image/jpg")}
       end
 
-      let(:user){
-          User.create!(
-            name: Faker::Name.name,
-            email: "test@test.com",
-            password: "test"
-          )
+      let(:user) {
+        User.create!(
+          name: Faker::Name.name,
+          email: "test@test.com",
+          password: "test"
+        )
       }
-      
-      let(:token){
+
+      let(:token) {
         result = Mutations::SignInUserMutation.new(object: nil, field: nil, context: {session: {}}).resolve(credentials: {email: user.email, password: user.password})
         result[:token]
       }
