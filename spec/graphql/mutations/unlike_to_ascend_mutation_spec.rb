@@ -19,6 +19,7 @@ module Mutations
         Ascend.create(route_id: route.id, user_id: user.id, likes: [user.id])
       end
 
+
       let(:variables) do
         {id: ascend.id}
       end
@@ -49,6 +50,7 @@ module Mutations
 
         it "not valid" do
           expect { FBoulderSchema.execute(query, variables: not_valid_variables, context: {current_user: user}) }.to raise_error(ActiveRecord::RecordNotFound)
+
         end
       end
 

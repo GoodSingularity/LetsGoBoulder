@@ -23,6 +23,10 @@ module Mutations
         {id: ascend.id}
       end
 
+      let(:not_valid_variables) do
+        {id: SecureRandom.uuid}
+      end
+
       let(:token) {
         result = Mutations::SignInUserMutation.new(object: nil, field: nil, context: {session: {}}).resolve(credentials: {email: user.email, password: user.password})
         result[:token]
@@ -41,6 +45,13 @@ module Mutations
           result = FBoulderSchema.execute(query, variables: variables, context: {current_user: user})
           ascend.reload
           expect(ascend[:archive]).to eq true
+        end
+      end
+
+      describe ".mutation does not pass" do
+        it "not valid" do
+          expect { FBoulderSchema.execute(query, variables: not_valid_variables, context: {current_user: user}) }.to raise_error(ActiveRecord::RecordNotFound)
+
         end
       end
 
