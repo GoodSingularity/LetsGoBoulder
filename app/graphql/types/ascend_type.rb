@@ -6,12 +6,16 @@ module Types
     field :user, Types::UserType, null: false
     field :route, Types::RouteType, null: false
 
-    def user
-      User.find object.user_id
+    def user(id: object.user_id)
+      BatchLoader.for(id).batch do |ids, loader|
+        User.where(id: ids).each { |user| loader.call(user.id, user) }
+      end
     end
 
-    def route
-      Route.find object.route_id
+    def route(id: object.route_id)
+      BatchLoader.for(id).batch do |ids, loader|
+        Route.where(id: ids).each { |route| loader.call(route.id, route) }
+      end
     end
   end
 end
