@@ -23,7 +23,7 @@ ActiveRecord::Schema.define(version: 2021_10_01_170112) do
     t.uuid "likes", default: [], array: true
   end
 
-  create_table "routes", force: :cascade do |t|
+  create_table "routes", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "name"
     t.integer "color"
     t.string "route_setter"
@@ -33,7 +33,7 @@ ActiveRecord::Schema.define(version: 2021_10_01_170112) do
     t.boolean "status", default: false
   end
 
-  create_table "users", force: :cascade do |t|
+  create_table "users", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "name"
     t.string "email"
     t.string "password_digest"
