@@ -7,6 +7,10 @@ module Mutations
         {routeSetter: "Kacper", color: 1, file: fixture_file_upload(Rails.root.join("spec", "fixtures", "files", "image.jpg"), "image/jpg")}
       end
 
+      let(:not_valid) do
+        {routeSetter: "Kacper", color: 1, file: fixture_file_upload(Rails.root.join("spec", "fixtures", "files", "file.txt"), "text/txt")}
+      end
+
       let(:user) {
         User.create!(
           name: Faker::Name.name,
@@ -31,10 +35,29 @@ module Mutations
         }
       end
 
+      let(:not_valid_params) do
+        {
+          "operations" => {
+            "query" => query,
+            "variables" => not_valid
+          }.to_json,
+          "map" => {"1" => ["variables.file"]}.to_json,
+          "1" => not_valid[:file]
+        }
+      end
+
       describe ".mutation passes" do
         it "returns a true" do
           post "/graphql", params: params, headers: {Authorization: token}
           expect(JSON.parse(response.body)["data"]["createRoute"]["status"]).to eq 200
+        end
+      end
+
+      describe ".mutation fails" do
+        it "returns a error" do
+          post "/graphql", params: not_valid_params, headers: {Authorization: token}
+          binding.pry
+          expect(JSON.parse(response.body)["errors"].first["message"]).to eq "This file is not jpg or png"
         end
       end
 
