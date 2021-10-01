@@ -6,5 +6,6 @@ module Types
     field :signin_user, mutation: Mutations::SignInUserMutation
     field :archive_ascend, mutation: Mutations::ArchiveAscendMutation
     field :add_like_to_ascend, mutation: Mutations::AddLikeToAscendMutation
+    field :unlike_to_ascend, mutation: Mutations::UnlikeAscendMutation
   end
 end
