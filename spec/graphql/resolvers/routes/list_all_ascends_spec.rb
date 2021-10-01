@@ -1,7 +1,7 @@
 require "rails_helper"
 
 module Resolvers
-  module Routes
+  module Ascends
     RSpec.describe ListAllAscends, type: :request do
       describe ".resolve" do
         let(:user) {
@@ -10,6 +10,16 @@ module Resolvers
             email: "test@test.com",
             password: "test"
           )
+        }
+
+        let(:route) {
+          Route.create(
+            name: SecureRandom.uuid, 
+            color: 1, 
+            route_setter: "Andrzej", 
+            files: [], 
+            status: true
+            )
         }
         let(:context) {
           ctx = {
@@ -23,7 +33,7 @@ module Resolvers
         end
 
         it "shows all ascends" do
-          Ascend.create(route_id: SecureRandom.uuid, user_id: user.id, likes: [SecureRandom.uuid])
+          Ascend.create(route_id: route.id, user_id: user.id, likes: [user.id])
           post = FBoulderSchema.execute(query, variables: {}, context: context)
           size = post["data"]["listAllAscends"].size
           expect(size).to eq(1)
@@ -32,17 +42,24 @@ module Resolvers
 
       def query
         <<~GQL
-          query{
-            listAllAscends{
-              likes
-              routeId
-              user{
-                id
-                email
-                name
-              }
+        query{
+          listAllAscends{
+            likes
+            routeId
+            user{
+              id
+              email
+              name
             }
+            route{
+              name
+              color
+              routeSetter
+              status
+            }
+            
           }
+        }
         GQL
       end
     end
