@@ -1,12 +1,10 @@
 module Mutations
-  class ArchiveAscendMutation < BaseMutation
-    argument :id, String, required: true
+  class ArchiveUserMutation < BaseMutation
     field :status, Int, null: false
 
     def resolve(**args)
       authenticate
-      ascend = Ascend.find args[:id]
-      ascend.update(archive: true)
+      context[:current_user].update(archive: true)
       {status: 200}
     end
 
