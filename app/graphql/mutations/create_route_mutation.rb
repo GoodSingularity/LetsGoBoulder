@@ -6,7 +6,7 @@ module Mutations
     field :status, Int, null: false
 
     def resolve(**args)
-      File.extname(args[:file].path) != (".png" || ".jpg") ? (raise GraphQL::ExecutionError, "This file is not jpg or png") : nil
+      (File.extname(args[:file].path) != ".jpg") ? (raise GraphQL::ExecutionError, "This file is not extension valid") : nil
       file_key = SecureRandom.uuid
       put_file(key: file_key, file: args[:file])
       context[:current_user].nil? ? (raise GraphQL::ExecutionError, "Authentication Error") : Route.create(name: SecureRandom.uuid, color: args[:color], route_setter: args[:route_setter], files: [file_key], status: true)
