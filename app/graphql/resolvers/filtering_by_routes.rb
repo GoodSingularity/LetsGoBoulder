@@ -7,16 +7,23 @@ module Resolvers
     argument :route_setter, String, required: true
 
     def resolve(**args)
+      authenticate
+
       color ||= args[:color]
       route_setter ||= args[:route_setter]
       routes = Route.all
-
-      context[:current_user].nil? ? (raise GraphQL::ExecutionError, "Authentication Error") : filtering_routes(routes: routes, color: color, route_setter: route_setter)
+      filtering_routes(routes: routes, color: color, route_setter: route_setter)
     rescue ActiveRecord::RecordNotFound => error
       raise GraphQL::ExecutionError, error.message
     end
 
     private
+
+    def authenticate
+      user = context[:current_user]
+      user.nil? ? (raise GraphQL::ExecutionError, "Authentication Error") : nil
+      user.archive == true ? (raise GraphQL::ExecutionError, "This user was archived") : nil
+    end
 
     def filtering_routes(routes:, color:, route_setter:)
       if color.nil?

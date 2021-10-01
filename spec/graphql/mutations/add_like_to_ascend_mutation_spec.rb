@@ -51,7 +51,6 @@ module Mutations
       describe ".mutation does not pass" do
         it "not valid" do
           expect { FBoulderSchema.execute(query, variables: not_valid_variables, context: {current_user: user}) }.to raise_error(ActiveRecord::RecordNotFound)
-
         end
       end
 

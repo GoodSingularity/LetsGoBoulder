@@ -7,5 +7,6 @@ module Types
     field :archive_ascend, mutation: Mutations::ArchiveAscendMutation
     field :add_like_to_ascend, mutation: Mutations::AddLikeToAscendMutation
     field :unlike_to_ascend, mutation: Mutations::UnlikeAscendMutation
+    field :archive_user, mutation: Mutations::ArchiveUserMutation
   end
 end

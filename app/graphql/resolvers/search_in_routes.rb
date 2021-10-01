@@ -6,6 +6,7 @@ module Resolvers
     argument :search, String, required: true
 
     def resolve(**args)
+      authenticate
       search = args[:search]
       if %w[black blue green orange yellow white].include? search.downcase
         search = return_color_id(search)
@@ -16,6 +17,12 @@ module Resolvers
     end
 
     private
+
+    def authenticate
+      user = context[:current_user]
+      user.nil? ? (raise GraphQL::ExecutionError, "Authentication Error") : nil
+      user.archive == true ? (raise GraphQL::ExecutionError, "This user was archived") : nil
+    end
 
     def return_color_id(name)
       levels = {black: 0,
