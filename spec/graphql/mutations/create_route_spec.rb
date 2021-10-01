@@ -56,8 +56,7 @@ module Mutations
       describe ".mutation fails" do
         it "returns a error" do
           post "/graphql", params: not_valid_params, headers: {Authorization: token}
-          binding.pry
-          expect(JSON.parse(response.body)["errors"].first["message"]).to eq "This file is not jpg or png"
+          expect(JSON.parse(response.body)["errors"].first["message"]).to eq "This file is not extension valid"
         end
       end
 
