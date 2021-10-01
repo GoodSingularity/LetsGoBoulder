@@ -14,7 +14,7 @@ module Mutations
           password: "test"
         )
       }
-      
+
       let(:ascend) do
         Ascend.create(route_id: route.id, user_id: user.id, likes: [user.id])
       end

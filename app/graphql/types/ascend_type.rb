@@ -6,12 +6,12 @@ module Types
     field :user, Types::UserType, null: false
     field :route, Types::RouteType, null: false
 
-    def user 
+    def user
       User.find object.user_id
-    end 
+    end
 
-    def route 
+    def route
       Route.find object.route_id
-    end 
+    end
   end
 end

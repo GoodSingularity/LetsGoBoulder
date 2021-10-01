@@ -14,12 +14,12 @@ module Resolvers
 
         let(:route) {
           Route.create(
-            name: SecureRandom.uuid, 
-            color: 1, 
-            route_setter: "Andrzej", 
-            files: [], 
+            name: SecureRandom.uuid,
+            color: 1,
+            route_setter: "Andrzej",
+            files: [],
             status: true
-            )
+          )
         }
         let(:context) {
           ctx = {
@@ -42,24 +42,24 @@ module Resolvers
 
       def query
         <<~GQL
-        query{
-          listAllAscends{
-            likes
-            routeId
-            user{
-              id
-              email
-              name
+          query{
+            listAllAscends{
+              likes
+              routeId
+              user{
+                id
+                email
+                name
+              }
+              route{
+                name
+                color
+                routeSetter
+                status
+              }
+              
             }
-            route{
-              name
-              color
-              routeSetter
-              status
-            }
-            
           }
-        }
         GQL
       end
     end
