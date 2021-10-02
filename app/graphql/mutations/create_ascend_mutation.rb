@@ -9,6 +9,7 @@ module Mutations
       route ||= Route.find(args[:route_id])
       users ||= User.find(args[:user_id])
       Ascend.create(route_id: args[:route_id], user_id: args[:user_id])
+      users.update(points: users.points+1)
       {status: 200}
     end
 
