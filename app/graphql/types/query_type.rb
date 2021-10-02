@@ -8,5 +8,6 @@ module Types
     field :search_in_routes, resolver: ::Resolvers::SearchInRoutes
     field :filtering_by_routes, resolver: ::Resolvers::FilteringByRoutes
     field :search_in_users, resolver: ::Resolvers::SearchInUsers
+    field :list_all_current_user_reactions, resolver: ::Resolvers::ListAllCurrentUserReactions
   end
 end
