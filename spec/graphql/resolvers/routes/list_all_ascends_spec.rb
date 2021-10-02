@@ -44,8 +44,11 @@ module Resolvers
         <<~GQL
           query{
             listAllAscends{
-              likes
-              routeId
+              likes{
+                email
+                name
+              }
+              id
               user{
                 id
                 email
@@ -57,7 +60,7 @@ module Resolvers
                 routeSetter
                 status
               }
-              
+
             }
           }
         GQL
