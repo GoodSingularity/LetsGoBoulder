@@ -16,7 +16,7 @@ module Resolvers
           Route.create(
             name: SecureRandom.uuid,
             color: 1,
-            route_setter: "Andrzej",
+            route_setter: "test",
             files: [],
             status: true
           )
@@ -57,7 +57,12 @@ module Resolvers
               route{
                 name
                 color
-                routeSetter
+                creator
+                {
+                id
+                name
+                email
+                }
                 status
               }
 

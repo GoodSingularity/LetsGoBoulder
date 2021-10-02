@@ -3,5 +3,9 @@ module Types
     field :id, ID, null: false
     field :name, String, null: false
     field :email, String, null: false
+
+    def email
+      object.email
+    end
   end
 end

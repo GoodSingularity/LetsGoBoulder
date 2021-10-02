@@ -26,11 +26,11 @@ module Resolvers
 
       describe ".resolve found" do
         before do
-          Route.create(name: Faker::Name.name, color: 1, route_setter: "Andrzej")
+          Route.create(name: Faker::Name.name, color: 1, route_setter: "test")
         end
 
         it "search in routes" do
-          result = FBoulderSchema.execute(query, variables: {search: "Andrzej"}, context: context)
+          result = FBoulderSchema.execute(query, variables: {search: "test"}, context: context)
           size = result["data"]["searchInRoutes"].size
           expect(size).to_not eq(0)
         end
@@ -42,7 +42,12 @@ module Resolvers
             searchInRoutes(search: $search){
               color
               name
-              routeSetter
+              creator
+              {
+                id
+                name
+                email
+              }
               status
             }
           }

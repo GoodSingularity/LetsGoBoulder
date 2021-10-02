@@ -17,17 +17,17 @@ module Resolvers
           }
         }
         before do
-          Route.create(name: Faker::Name.name, color: 1, route_setter: "Andrzej")
+          Route.create(name: Faker::Name.name, color: 1, route_setter: user.name)
         end
 
         it "filtering by routes" do
-          result = FBoulderSchema.execute(query, variables: {color: 1, routeSetter: "Andrzej"}, context: context)
+          result = FBoulderSchema.execute(query, variables: {color: 1, routeSetter: user.name}, context: context)
           size = result["data"]["filteringByRoutes"].size
           expect(size).to eq(1)
         end
 
         it "none found in filtering by routes" do
-          result = FBoulderSchema.execute(query, variables: {color: 0, routeSetter: "Andrzej"}, context: context)
+          result = FBoulderSchema.execute(query, variables: {color: 0, routeSetter: user.name}, context: context)
           size = result["data"]["filteringByRoutes"].size
           expect(size).to eq(0)
         end
@@ -38,7 +38,12 @@ module Resolvers
           query($color: Int!, $routeSetter: String!) {
               filteringByRoutes(color: $color, routeSetter: $routeSetter) {
                 name
-                routeSetter
+                creator
+                {
+                id
+                name
+                email
+                }
                 color
                 status
               }
