@@ -8,7 +8,8 @@ module Resolvers
           User.create!(
             name: "test",
             email: "test@test.com",
-            password: "test"
+            password: "test",
+            phone_number: 667089810
           )
         }
 
@@ -48,12 +49,14 @@ module Resolvers
               likes{
                 email
                 name
+                phoneNumber
               }
               id
               user{
                 id
                 email
                 name
+                phoneNumber
               }
               route{
                 name
@@ -63,6 +66,7 @@ module Resolvers
                 id
                 name
                 email
+                phoneNumber
                 }
                 status
               }

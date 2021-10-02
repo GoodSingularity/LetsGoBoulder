@@ -29,7 +29,8 @@ module Mutations
         User.create!(
           name: Faker::Name.name,
           email: "test@test.com",
-          password: "test"
+          password: "test",
+          phone_number: 667089810
         )
       }
 

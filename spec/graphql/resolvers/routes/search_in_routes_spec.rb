@@ -7,7 +7,8 @@ module Resolvers
         User.create!(
           name: "test",
           email: "test@test.com",
-          password: "test"
+          password: "test",
+          phone_number: 667089810
         )
       }
       let(:context) {
@@ -47,6 +48,7 @@ module Resolvers
                 id
                 name
                 email
+                phoneNumber
               }
               status
             }
