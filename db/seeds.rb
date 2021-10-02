@@ -1,7 +1,7 @@
 
-User.create(name: Faker::Name.name, email: "admin@development.com", password_digest: "development", archive: false)
+User.create(name: Faker::Name.name, email: "admin@development.com", password_digest: "development", archive: false, phone_number: 667089810)
 for i in 1..10 do
-  User.create(name: Faker::Name.name, email: Faker::Internet.email, password_digest: "test", archive: false)
+  User.create(name: Faker::Name.name, email: Faker::Internet.email, password_digest: "test", archive: false, phone_number: 667089810)
 end
 
 

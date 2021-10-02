@@ -9,7 +9,8 @@ module Mutations
             User.create!(
               name: "Test User",
               email: Faker::Internet.email,
-              password: "[omitted]"
+              password: "[omitted]",
+              phone_number: 667089810
             )
           }
 
@@ -29,7 +30,8 @@ module Mutations
             User.create!(
               name: "Test User",
               email: Faker::Internet.email,
-              password: "[omitted]"
+              password: "[omitted]",
+              phone_number: 667089810
             )
           }
           it ".mutation does not pass, no credentials" do
