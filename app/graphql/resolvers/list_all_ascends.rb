@@ -6,7 +6,7 @@ module Resolvers
 
     def resolve
       authenticate
-      Ascend.all
+      Ascend.all.reload
     rescue ActiveRecord::RecordNotFound => error
       raise GraphQL::ExecutionError, error.message
     end

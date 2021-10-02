@@ -6,7 +6,8 @@ module Mutations
     def resolve(**args)
       ascend = Ascend.find args[:id]
       authenticate
-      ascend.update(likes: (ascend.likes.uniq + [context[:current_user].id].uniq).uniq)
+      array = (ascend.likes.uniq + [context[:current_user].id].uniq)
+      ascend.update(likes: array)
       {status: 200}
     end
 
