@@ -6,5 +6,5 @@ end
 
 
 for i in 1..5 do
-  Route.create(name: Faker::Name.name, route_setter: User.first.name color: i, status: true, files: [])
+  Route.create(name: Faker::Name.name, route_setter: User.first.name, color: i, status: true, files: [])
 end
