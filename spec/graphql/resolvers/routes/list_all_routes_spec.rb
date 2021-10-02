@@ -28,7 +28,12 @@ module Resolvers
           query {
               listAllRoutes {
               name
-              routeSetter
+              creator
+              {
+                id
+                name
+                email
+              }
               color
               status
               }
