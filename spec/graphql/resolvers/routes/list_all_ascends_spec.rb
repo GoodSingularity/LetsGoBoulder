@@ -54,6 +54,7 @@ module Resolvers
                 id
                 email
                 name
+                phoneNumber
               }
               route{
                 name
@@ -63,6 +64,7 @@ module Resolvers
                 id
                 name
                 email
+                phoneNumber
                 }
                 status
               }

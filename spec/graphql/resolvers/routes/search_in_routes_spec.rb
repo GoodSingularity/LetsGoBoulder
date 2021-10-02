@@ -48,6 +48,7 @@ module Resolvers
                 id
                 name
                 email
+                phoneNumber
               }
               status
             }

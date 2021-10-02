@@ -34,6 +34,7 @@ module Resolvers
                 id
                 name
                 email
+                phoneNumber
               }
               color
               status

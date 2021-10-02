@@ -49,12 +49,14 @@ module Resolvers
               likes{
                 email
                 name
+                phoneNumber
               }
               id
               user{
                 id
                 email
                 name
+                phoneNumber
               }
               route{
                 name
@@ -64,6 +66,7 @@ module Resolvers
                 id
                 name
                 email
+                phoneNumber
                 }
                 status
               }
