@@ -28,15 +28,5 @@ module Types
         Route.where(id: route_ids).each { |route| loader.call(route.id, route) }
       end
     end
-
-    private
-
-    def load_users(instance: object)
-      BatchLoader::GraphQL.for(instance.user_id).batch do |user_ids, loader|
-        User.where(id: user_ids).map { |user|
-          loader.call(user.id, user)
-        }
-      end
-    end
   end
 end
