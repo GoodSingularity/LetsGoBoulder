@@ -7,7 +7,7 @@ module Mutations
     field :status, Boolean, null: false
 
     def resolve(**args)
-      authenticate
+      Helpers::Authenticate.new.call(context: context)
 
       route = Route.where(name: args[:id])
       update(route, color: args[:color], status: args[:status])
@@ -15,12 +15,6 @@ module Mutations
     end
 
     private
-
-    def authenticate
-      user = context[:current_user]
-      user.nil? ? (raise GraphQL::ExecutionError, "Authentication Error") : nil
-      user.archive == true ? (raise GraphQL::ExecutionError, "This user was archived") : nil
-    end
 
     def update(route, color:, status:)
       if [0, 1, 2, 3, 4, 5].include?(color)

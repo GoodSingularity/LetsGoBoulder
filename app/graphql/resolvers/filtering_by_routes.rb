@@ -7,7 +7,7 @@ module Resolvers
     argument :route_setter, String, required: true
 
     def resolve(**args)
-      authenticate
+      Helpers::Authenticate.new.call(context: context)
 
       color ||= args[:color]
       route_setter ||= args[:route_setter]
@@ -18,12 +18,6 @@ module Resolvers
     end
 
     private
-
-    def authenticate
-      user = context[:current_user]
-      user.nil? ? (raise GraphQL::ExecutionError, "Authentication Error") : nil
-      user.archive == true ? (raise GraphQL::ExecutionError, "This user was archived") : nil
-    end
 
     def filtering_routes(routes:, color:, route_setter:)
       if color.nil?
