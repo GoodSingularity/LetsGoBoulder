@@ -11,6 +11,6 @@ module Types
     field :list_all_current_user_reactions, resolver: ::Resolvers::ListAllCurrentUserReactions
     field :see_details_of_current_user, resolver: ::Resolvers::SeeDetailsOfCurrentUser
     field :high_score_of_users, resolver: ::Resolvers::HighScoreOfUsers
-
+    field :first_user_in_high_score_by_points, resolver: ::Resolvers::FirstUserInHighScoreByPoints
   end
 end
