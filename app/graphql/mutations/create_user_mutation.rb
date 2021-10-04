@@ -11,9 +11,13 @@ module Mutations
     argument :phone_number, Int, required: true
 
     type Types::UserType
+    field :user, ::Types::UserType, null: false
+    field :status, Int, null: false
 
     def resolve(name: nil, phone_number: nil, auth_provider: nil)
-      Context::Users::Commands::CreateSingleUser.new.call(auth_provider: auth_provider, name: name, phone_number: phone_number)
+      user=Context::Users::Commands::CreateSingleUser.new.call(auth_provider: auth_provider, name: name, phone_number: phone_number)
+      SignUpMailer.with(receiver: user.email, phone_number: user.phone_number, name: user.name).afterwards.deliver_now!
+      user
     end
   end
 end
