@@ -6,7 +6,6 @@ module Resolvers
 
     def resolve(**args)
       authenticate
-      search = args[:search]
       User.order('points desc')
     rescue ActiveRecord::RecordNotFound => error
       raise GraphQL::ExecutionError, error.message
