@@ -4,10 +4,8 @@ module Mutations
     field :status, Int, null: false
 
     def resolve(**args)
-      ascend = Ascend.find args[:id]
       Helpers::Authenticate.new.call(context: context)
-      array = (ascend.likes.uniq + [context[:current_user].id].uniq)
-      ascend.update(likes: array)
+      Context::Ascends::Commands::AddLikeToAscend.new.call(args: args, current_user_id: context[:current_user].id)
       {status: 200}
     end
   end

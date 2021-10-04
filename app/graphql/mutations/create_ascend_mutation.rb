@@ -7,11 +7,8 @@ module Mutations
 
     def resolve(**args)
       Helpers::Authenticate.new.call(context: context)
-      route ||= Route.find(args[:route_id])
-      users ||= User.find(args[:user_id])
-      Ascend.create(route_id: args[:route_id], user_id: args[:user_id])
-      point = args[:is_flashed] == true ? 2 : 1
-      users.update(points: users.points+point)
+      Context::Ascends::Commands::CreateAscend.new.call(args: args)
+
       {status: 200}
     end
   end
