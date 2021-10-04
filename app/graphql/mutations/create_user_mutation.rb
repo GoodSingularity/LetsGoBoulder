@@ -13,12 +13,7 @@ module Mutations
     type Types::UserType
 
     def resolve(name: nil, phone_number: nil, auth_provider: nil)
-      User.create!(
-        name: name,
-        email: auth_provider&.[](:credentials)&.[](:email),
-        password: auth_provider&.[](:credentials)&.[](:password),
-        phone_number: phone_number
-      )
+      Context::Users::Commands::CreateSingleUser.new.call(auth_provider: auth_provider, name: name, phone_number: phone_number)
     end
   end
 end

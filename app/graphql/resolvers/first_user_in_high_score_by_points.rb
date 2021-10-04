@@ -6,7 +6,7 @@ module Resolvers
 
     def resolve(**args)
       Helpers::Authenticate.new.call(context: context)
-      User.order('points desc')[0]
+      Context::Users::Queries::UserWithHighestPoints.new.call
     rescue ActiveRecord::RecordNotFound => error
       raise GraphQL::ExecutionError, error.message
     end
