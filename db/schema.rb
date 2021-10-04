@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_10_02_902071) do
+ActiveRecord::Schema.define(version: 2021_10_04_902071) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -22,6 +22,7 @@ ActiveRecord::Schema.define(version: 2021_10_02_902071) do
     t.datetime "updated_at", precision: 6, null: false
     t.uuid "likes", default: [], array: true
     t.boolean "archive", default: false
+    t.boolean "is_flashed", default: false
   end
 
   create_table "routes", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|

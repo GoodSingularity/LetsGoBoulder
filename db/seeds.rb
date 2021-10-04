@@ -12,5 +12,5 @@ end
 all_users=User.all
 
 for i in 1..5 do
-  Ascend.create(user_id: User.first.id, likes: all_users.pluck(:id), archive: false, route_id: Route.first.id)
+  Ascend.create(user_id: User.first.id, likes: all_users.pluck(:id), archive: false, route_id: Route.first.id, is_flashed: true)
 end

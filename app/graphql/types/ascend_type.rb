@@ -3,6 +3,7 @@ module Types
     field :id, ID, null: false
     field :user, Types::UserType, null: false
     field :route, Types::RouteType, null: false
+    field :is_flashed, Boolean, null: false
 
     field :likes, [Types::UserType], null: false
 
