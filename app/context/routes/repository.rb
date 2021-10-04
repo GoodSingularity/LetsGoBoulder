@@ -17,6 +17,20 @@ module Context
         )
       end
 
+      def filtering_routes(routes:, color:, route_setter:)
+        if color.nil?
+          color = -1
+        end
+        if !color.nil?
+          routes = @adapter.all.where(color: color).filter_by_color
+        end
+
+        if !route_setter.nil?
+          routes = routes.where(route_setter: route_setter).filter_by_route_setter
+        end
+        routes
+      end
+
       def update(route, color:, status:)
         if [0, 1, 2, 3, 4, 5].include?(color)
           @adapter.update(color: color)
