@@ -20,11 +20,13 @@ module Mutations
               password: user.password
             })
           }
+
           it ".mutation does pass succesful" do
             expect(result[:token].present?)
             assert_equal result[:user], user
           end
         end
+
         describe ".mutation failes" do
           let(:user) {
             User.create!(
@@ -34,6 +36,7 @@ module Mutations
               phone_number: 667089810
             )
           }
+
           it ".mutation does not pass, no credentials" do
             not_loged_in = Mutations::SignInUserMutation.new(object: nil, field: nil, context: {session: {}}).resolve(credentials: {})
 
