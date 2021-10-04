@@ -6,7 +6,7 @@ module Mutations
     field :status, Int, null: false
 
     def resolve(**args)
-      authenticate
+      Helpers::Authenticate.new.call(context: context)
       File.extname(args[:file].path) != ".jpg" ? (raise GraphQL::ExecutionError, "This file is not extension valid") : nil
       file_key = SecureRandom.uuid
       put_file(key: file_key, file: args[:file])
@@ -15,14 +15,6 @@ module Mutations
     end
 
     private
-
-    private
-
-    def authenticate
-      user = context[:current_user]
-      user.nil? ? (raise GraphQL::ExecutionError, "Authentication Error") : nil
-      user.archive == true ? (raise GraphQL::ExecutionError, "This user was archived") : nil
-    end
 
     def put_file(key:, file:)
       config = {
