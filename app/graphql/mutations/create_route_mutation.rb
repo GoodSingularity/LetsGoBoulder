@@ -7,25 +7,9 @@ module Mutations
 
     def resolve(**args)
       Helpers::Authenticate.new.call(context: context)
-      File.extname(args[:file].path) != ".jpg" ? (raise GraphQL::ExecutionError, "This file is not extension valid") : nil
-      file_key = SecureRandom.uuid
-      put_file(key: file_key, file: args[:file])
-      Route.create(name: SecureRandom.uuid, color: args[:color], route_setter: args[:route_setter], files: [file_key], status: true)
+      file_key = Context::Routes::Commands::PutFileToRoute.new.call(file: args[:file])
+      Context::Routes::Repository.new.create(args: args, file_key: file_key)
       {status: 200}
-    end
-
-    private
-
-    def put_file(key:, file:)
-      config = {
-        key: key,
-        bucket: "routes"
-      }
-      $s3.put_object(
-        key: config[:key],
-        body: file.tempfile.read,
-        bucket: config[:bucket]
-      )
     end
   end
 end
