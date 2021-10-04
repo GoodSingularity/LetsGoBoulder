@@ -1,7 +1,7 @@
 require "rails_helper"
 
 module Resolvers
-  module Routes
+  module Users
     RSpec.describe SeeDetailsOfCurrentUser, type: :request do
       let(:user) {
         User.create!(
