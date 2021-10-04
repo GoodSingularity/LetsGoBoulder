@@ -5,12 +5,8 @@ module Mutations
 
     def resolve(**args)
       Helpers::Authenticate.new.call(context: context)
-
-      current_user = context[:current_user]
-      ascend = Ascend.find args[:id]
-      ascend.nil? ? (raise ActiveRecord::RecordNotFound, "Ascend not found Error") : nil
-      current_user_id = current_user.id
-      ascend.likes.include? current_user_id ? ascend.update(likes: (ascend.likes.uniq - [current_user_id].uniq).uniq) : (raise GraphQL::ExecutionError, "User not exists in like array")
+      current_user_id = context[:current_user].id
+      Context::Ascends::Commands::UnlikeAscend.new.call(ascend_id: args[:id], current_user_id: current_user_id)
       {status: 200}
     end
   end
