@@ -19,14 +19,13 @@ module Mutations
       let(:variables) do
         {
           routeId: route.id,
-          userId: user.id
+          isFlashed: true
         }
       end
 
       let(:not_valid_variables) do
         {
           routeId: SecureRandom.uuid,
-          userId: SecureRandom.uuid,
           isFlashed: true
         }
       end
@@ -58,8 +57,8 @@ module Mutations
 
       def query
         <<~GQL
-            mutation($userId: ID!, $routeId: ID!, $isFlashed: Boolean!){
-            createAscend(input: {userId: $userId, routeId: $routeId, isFlashed: $isFlashed}){
+            mutation($routeId: ID!, $isFlashed: Boolean!){
+            createAscend(input: {routeId: $routeId, isFlashed: $isFlashed}){
               clientMutationId
               status
             }
