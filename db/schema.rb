@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_10_04_902071) do
+ActiveRecord::Schema.define(version: 2021_10_04_962071) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -44,6 +44,7 @@ ActiveRecord::Schema.define(version: 2021_10_04_902071) do
     t.boolean "archive", default: false
     t.integer "points", default: 0
     t.integer "phone_number", default: 0
+    t.uuid "avatar_id", default: -> { "gen_random_uuid()" }, null: false
   end
 
 end

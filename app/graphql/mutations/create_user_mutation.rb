@@ -9,13 +9,15 @@ module Mutations
     argument :name, String, required: true
     argument :auth_provider, AuthProviderSignupData, required: false
     argument :phone_number, Int, required: true
+    argument :file, ApolloUploadServer::Upload, required: true
 
     type Types::UserType
     field :user, ::Types::UserType, null: false
     field :status, Int, null: false
 
-    def resolve(name: nil, phone_number: nil, auth_provider: nil)
-      user=Context::Users::Commands::CreateSingleUser.new.call(auth_provider: auth_provider, name: name, phone_number: phone_number)
+    def resolve(name: nil, phone_number: nil, auth_provider: nil, file: nil)
+      avatar_id = Context::Users::Commands::PutFileToUser.new.call(file: file)
+      user=Context::Users::Commands::CreateSingleUser.new.call(auth_provider: auth_provider, name: name, phone_number: phone_number, avatar_id: avatar_id)
       SignUpMailer.with(receiver: user.email, phone_number: user.phone_number, name: user.name).afterwards.deliver_now!
       user
     end
