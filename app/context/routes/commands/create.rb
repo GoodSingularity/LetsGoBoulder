@@ -1,9 +1,8 @@
 module Context
   module Routes
-    module Notifiers
+    module Commands
       class Create
         def call(event)
-          event
           stream = event.data
           stream[:adapter].create(
             name: SecureRandom.uuid,
