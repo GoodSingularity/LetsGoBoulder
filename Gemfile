@@ -15,6 +15,7 @@ gem 'batch-loader'
 gem "pg_search"
 gem "graphql"
 gem "aws-sdk"
+gem "rails_event_store"
 gem "apollo_upload_server", "2.1.0"
 gem "twilio-ruby"
 gem "standard", group: [:development, :test]
