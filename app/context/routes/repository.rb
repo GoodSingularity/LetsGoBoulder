@@ -18,6 +18,15 @@ module Context
         $event_store.publish(event, stream_name: SecureRandom.uuid)
       end
 
+      def delete(args:)
+        event = RouteDeleted.new(data: {
+          adapter: @adapter,
+          id: args[:id],
+          file_key: args[:file_id]
+        })
+        $event_store.publish(event, stream_name: SecureRandom.uuid)
+      end
+
       def filtering_routes(routes:, color:, route_setter:)
         if color.nil?
           color = -1

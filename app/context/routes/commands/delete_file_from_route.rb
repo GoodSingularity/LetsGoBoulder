@@ -3,11 +3,12 @@ module Context
     module Commands
       class DeleteFileFromRoute
 
-        def call(args:)
-          file_id = args[:file_id]
-          route ||= Route.find args[:id]
+        def call(event)
+          stream = event.data
+          file_id = stream[:file_key]
+          route ||= Route.find stream[:id]
           (route.files).include? file_id ? $s3.delete_object(key: file_id, bucket: "routes") : (raise GraphQL::ExecutionError, "This file does not exist in route")
-          files = route.files-[args[:file_id]]
+          files = route.files-[stream[:file_key]]
           route.update(files: files)
         end
       end
