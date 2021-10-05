@@ -27,6 +27,16 @@ module Context
         $event_store.publish(event, stream_name: SecureRandom.uuid)
       end
 
+      def update(args:)
+        event = RouteWasUpdated.new(data: {
+          adapter: @adapter,
+          id: args[:id],
+          color: args[:color],
+          status: args[:status]
+        })
+        $event_store.publish(event, stream_name: SecureRandom.uuid)
+      end
+
       def filtering_routes(routes:, color:, route_setter:)
         if color.nil?
           color = -1
@@ -39,15 +49,6 @@ module Context
           routes = routes.where(route_setter: route_setter).filter_by_route_setter
         end
         routes
-      end
-
-      def update(route, color:, status:)
-        if [0, 1, 2, 3, 4, 5].include?(color)
-          @adapter.update(color: color)
-        end
-        if [true, false].include?(status)
-          @adapter.update(status: status)
-        end
       end
     end
   end

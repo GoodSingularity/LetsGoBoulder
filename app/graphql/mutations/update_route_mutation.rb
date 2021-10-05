@@ -8,7 +8,7 @@ module Mutations
 
     def resolve(**args)
       Helpers::Authenticate.new.call(context: context)
-      Context::Routes::Commands::UpdateRoute.new.call(args: args)
+      Context::Routes::Repository.new.update(args: args)
       {status: 200}
     end
 
