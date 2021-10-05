@@ -19,7 +19,7 @@ module Context
       end
 
       def delete(args:)
-        event = RouteDeleted.new(data: {
+        event = FileWasDeletedFromRoute.new(data: {
           adapter: @adapter,
           id: args[:id],
           file_key: args[:file_id]
