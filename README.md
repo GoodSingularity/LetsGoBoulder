@@ -8,6 +8,8 @@ API uses:
 * Graphql
 * RSpec, testing framework
 * Pry, debugger
+* Batch Loader for N+1 Query problem
+* Rails Event Store
 
 Initialize an app:
 * rails db:create
@@ -28,6 +30,10 @@ Application features:
 - Listing all routes
 - Filtering routes
 - Searching routes by name, level or route setter
+- Authentication (Sign In / Sign Out)
+- Liking Ascend
+- UnLiking Ascend
+- etc
 
 
 Explanation:
@@ -38,7 +44,3 @@ Explanation:
 
 
 To do
-- Adding users model, authentication feature
-- Adding ascention model. Climber can prove that this particular route was climbed on. 
-- Adding likes system to ascention model
-- Adding listing current logged in user, ascentions
