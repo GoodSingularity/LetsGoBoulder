@@ -8,7 +8,7 @@ module Context
       end
 
       def create(args:, file_key:)
-        event = RouteCreated.new(data: {
+        event = RouteWasCreated.new(data: {
           adapter: @adapter,
           color: args[:color],
           route_setter: args[:route_setter],
