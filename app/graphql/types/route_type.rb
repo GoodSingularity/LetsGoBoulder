@@ -1,5 +1,6 @@
 module Types
   class RouteType < Types::BaseObject
+    field :id, ID, null: false
     field :files, [Types::FileType], null: false
     field :name, String, null: false
     field :creator, [Types::UserType], null: false
