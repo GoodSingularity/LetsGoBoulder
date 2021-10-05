@@ -8,13 +8,14 @@ module Context
       end
 
       def create(args:, file_key:)
-        @adapter.create(name:
-          SecureRandom.uuid,
+        event = RouteCreated.new(data: {
+          adapter: @adapter,
           color: args[:color],
           route_setter: args[:route_setter],
           files: [file_key],
           status: true
-        )
+        })
+        $event_store.publish(event, stream_name: SecureRandom.uuid)
       end
 
       def filtering_routes(routes:, color:, route_setter:)
