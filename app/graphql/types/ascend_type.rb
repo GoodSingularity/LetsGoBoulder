@@ -6,6 +6,7 @@ module Types
     field :is_flashed, Boolean, null: false
 
     field :likes, [Types::UserType], null: false
+    field :likes_counter, Int, null: false
 
     def likes
       BatchLoader::GraphQL.for(object.likes.uniq).batch(default_value: []) do |user_ids, loader|
@@ -15,6 +16,10 @@ module Types
           }
         }
       end
+    end
+
+    def likes_counter
+      likes.as_json["batch_loader"].size
     end
 
 
