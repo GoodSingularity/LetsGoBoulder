@@ -24,10 +24,12 @@ module Context
       end
 
       def unlike(ascend_id:, current_user_id:)
-        ascend = @adapter.find ascend_id
-        ascend.nil? ? (raise ActiveRecord::RecordNotFound, "Ascend not found Error") : nil
-
-        ascend.likes.include? current_user_id ? ascend.update(likes: (ascend.likes.uniq - [current_user_id].uniq).uniq) : (raise GraphQL::ExecutionError, "User not exists in like array")
+        event = AscendWasUnliked.new(data: {
+          adapter: @adapter,
+          ascend_id: ascend_id,
+          current_user_id: current_user_id
+        })
+        $event_store.publish(event, stream_name: SecureRandom.uuid)
       end
 
       def create_ascend(args:)
