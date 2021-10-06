@@ -8,9 +8,12 @@ module Context
       end
 
       def add_like(args:, current_user_id:)
-        ascend = @adapter.find args[:id]
-        array = (ascend.likes.uniq + [current_user_id].uniq)
-        ascend.update(likes: array)
+        event = AscendWasLiked.new(data: {
+          id: args[:id],
+          current_user_id: current_user_id,
+          adapter: @adapter
+        })
+        $event_store.publish(event, stream_name: SecureRandom.uuid)
       end
 
       def archive_ascend(id:)
