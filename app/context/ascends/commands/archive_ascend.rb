@@ -3,9 +3,10 @@ module Context
     module Commands
       class ArchiveAscend
 
-        def call(id:)
-          route = Route.where(name: id)
-          Context::Ascends::Repository.new.archive_ascend(id: id)
+        def call(event)
+          stream = event.data
+          ascend = Ascend.find stream[:id] 
+          ascend.update(archive: true)
         end
       end
     end
