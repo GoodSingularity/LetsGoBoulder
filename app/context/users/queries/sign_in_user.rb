@@ -1,6 +1,6 @@
 module Context
   module Users
-    module Commands
+    module Queries
       class SignInUser
 
         def call(credentials:, context:)
