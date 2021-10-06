@@ -18,12 +18,16 @@ module Context
         }
         )
         $event_store.publish(event, stream_name: SecureRandom.uuid)
-
       end
 
-      def update(user, file:)
-        new_avatar_id = Users::Commands::PutFileToUser.new.call(file: file)
-        user.update(avatar_id: new_avatar_id)
+      def update(id:, file:)
+        event = UpdateUserProfileImageWasUpdated.new(data: {
+          id: id,
+          file: file,
+          adapter: @adapter
+        }
+        )
+        $event_store.publish(event, stream_name: SecureRandom.uuid)
       end
     end
   end
