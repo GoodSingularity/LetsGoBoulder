@@ -7,7 +7,7 @@ module Mutations
     def resolve(**args)
       Helpers::Authenticate.new.call(context: context)
       args = args.merge({user_id: context[:current_user].id})
-      Context::Ascends::Commands::CreateAscend.new.call(args: args)
+      Context::Ascends::Repository.new.create_ascend(args: args)
 
       {status: 200}
     end
