@@ -17,8 +17,10 @@ module Context
       end
 
       def archive_ascend(id:)
-        ascend = Ascend.find id
-        ascend.update(archive: true)
+        event = AscendWasArchived.new(data: {
+          id: id
+        })
+        $event_store.publish(event, stream_name: SecureRandom.uuid)
       end
 
       def unlike(ascend_id:, current_user_id:)

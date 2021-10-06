@@ -5,7 +5,7 @@ module Mutations
 
     def resolve(**args)
       Helpers::Authenticate.new.call(context: context)
-      Context::Ascends::Commands::ArchiveAscend.new.call(id: args[:id])
+      Context::Ascends::Repository.new.archive_ascend(id: args[:id])
       {status: 200}
     end
   end

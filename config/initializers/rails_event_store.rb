@@ -4,4 +4,6 @@ Rails.configuration.to_prepare do
   $event_store.subscribe(Context::Routes::Commands::DeleteFileFromRoute.new, to: [FileWasDeletedFromRoute])
   $event_store.subscribe(Context::Routes::Commands::UpdateRoute.new, to: [RouteWasUpdated])
   $event_store.subscribe(Context::Ascends::Commands::AddLikeToAscend.new, to: [AscendWasLiked])
+  $event_store.subscribe(Context::Ascends::Commands::ArchiveAscend.new, to: [AscendWasArchived])
+
 end
