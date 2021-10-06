@@ -31,11 +31,11 @@ module Context
       end
 
       def create_ascend(args:)
-        route ||= Route.find(args[:route_id])
-        users ||= User.find(args[:user_id])
-        @adapter.create(route_id: args[:route_id], user_id: args[:user_id], is_flashed: args[:is_flashed])
-        point = args[:is_flashed] == true ? 2 : 1
-        users.update(points: users.points+point)
+        event = AscendWasCreated.new(data: {
+          adapter: @adapter,
+          args: args
+        })
+        $event_store.publish(event, stream_name: SecureRandom.uuid)
       end
     end
   end

@@ -5,5 +5,5 @@ Rails.configuration.to_prepare do
   $event_store.subscribe(Context::Routes::Commands::UpdateRoute.new, to: [RouteWasUpdated])
   $event_store.subscribe(Context::Ascends::Commands::AddLikeToAscend.new, to: [AscendWasLiked])
   $event_store.subscribe(Context::Ascends::Commands::ArchiveAscend.new, to: [AscendWasArchived])
-
+  $event_store.subscribe(Context::Ascends::Commands::CreateAscend.new, to: [AscendWasCreated])
 end
