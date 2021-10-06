@@ -7,4 +7,6 @@ Rails.configuration.to_prepare do
   $event_store.subscribe(Context::Ascends::Commands::ArchiveAscend.new, to: [AscendWasArchived])
   $event_store.subscribe(Context::Ascends::Commands::CreateAscend.new, to: [AscendWasCreated])
   $event_store.subscribe(Context::Ascends::Commands::UnlikeAscend.new, to: [AscendWasUnliked])
+  $event_store.subscribe(Context::Users::Commands::CreateSingleUser.new, to: [UserWasCreated])
+
 end

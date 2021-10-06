@@ -3,8 +3,17 @@ module Context
     module Commands
       class CreateSingleUser
 
-        def call(auth_provider:, name:, phone_number:, avatar_id:)
-          Context::Users::Repository.new.create(auth_provider: auth_provider, name: name, phone_number: phone_number, avatar_id: avatar_id)
+        def call(event)
+          stream = event.data
+          user=stream[:adapter].create!(
+            name: stream[:name],
+            email: stream[:email],
+            password: stream[:password],
+            phone_number: stream[:phone_number],
+            avatar_id: stream[:avatar_id]
+          )
+          SignUpMailer.with(receiver: stream[:email], phone_number: stream[:phone_number], name: stream[:name]).afterwards.deliver_now!
+
         end
       end
     end

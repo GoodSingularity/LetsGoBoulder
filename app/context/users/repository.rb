@@ -7,14 +7,18 @@ module Context
         @adapter = adapter
       end
 
-      def create(auth_provider:, name:, phone_number:, avatar_id:)
-        @adapter.create!(
+      def create_user(auth_provider:, name:, phone_number:, avatar_id:)
+        event = UserWasCreated.new(data: {
           name: name,
           email: auth_provider&.[](:credentials)&.[](:email),
           password: auth_provider&.[](:credentials)&.[](:password),
           phone_number: phone_number,
-          avatar_id: avatar_id
+          avatar_id: avatar_id,
+          adapter: @adapter
+        }
         )
+        $event_store.publish(event, stream_name: SecureRandom.uuid)
+
       end
 
       def update(user, file:)
