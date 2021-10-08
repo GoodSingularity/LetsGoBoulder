@@ -12,5 +12,6 @@ module Types
     field :see_details_of_current_user, resolver: ::Resolvers::SeeDetailsOfCurrentUser
     field :high_score_of_users, resolver: ::Resolvers::HighScoreOfUsers
     field :first_user_in_high_score_by_points, resolver: ::Resolvers::FirstUserInHighScoreByPoints
+    field :list_ascends_for_route_id, resolver: ::Resolvers::ListAscendsForRouteId
   end
 end
