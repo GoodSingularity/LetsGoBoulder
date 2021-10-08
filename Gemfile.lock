@@ -1346,6 +1346,10 @@ GEM
       ffi (~> 1.0)
     regexp_parser (2.1.1)
     rexml (3.2.5)
+    rspec (3.10.0)
+      rspec-core (~> 3.10.0)
+      rspec-expectations (~> 3.10.0)
+      rspec-mocks (~> 3.10.0)
     rspec-core (3.10.1)
       rspec-support (~> 3.10.0)
     rspec-expectations (3.10.1)
@@ -1385,6 +1389,8 @@ GEM
     ruby_event_store-browser (2.3.0)
       ruby_event_store (= 2.3.0)
       sinatra
+    ruby_event_store-rspec (2.3.0)
+      rspec (~> 3.0)
     sinatra (2.1.0)
       mustermann (~> 1.0)
       rack (~> 2.2)
@@ -1436,6 +1442,7 @@ DEPENDENCIES
   rails (~> 6.1.4, >= 6.1.4.1)
   rails_event_store
   rspec-rails (~> 5.0.0)
+  ruby_event_store-rspec
   spring
   standard
   twilio-ruby
