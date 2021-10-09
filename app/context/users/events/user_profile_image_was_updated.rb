@@ -1,2 +1,2 @@
-class UpdateUserProfileImageWasUpdated < RailsEventStore::Event
+class UserProfileImageWasUpdated < RailsEventStore::Event
 end

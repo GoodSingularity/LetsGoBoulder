@@ -21,7 +21,7 @@ module Context
       end
 
       def update(id:, file:)
-        event = UpdateUserProfileImageWasUpdated.new(data: {
+        event = UserProfileImageWasUpdated.new(data: {
           id: id,
           file: file,
           adapter: @adapter
