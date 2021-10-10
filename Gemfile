@@ -18,6 +18,7 @@ gem "aws-sdk"
 gem "rails_event_store"
 gem "apollo_upload_server", "2.1.0"
 gem "twilio-ruby"
+gem 'simplecov', require: false, group: :test
 gem "standard", group: [:development, :test]
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 # gem 'jbuilder', '~> 2.7'
