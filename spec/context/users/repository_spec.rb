@@ -10,7 +10,7 @@ RSpec.describe Context::Users::Repository, type: :model do
           password: "12345678910"
         }
       }
-      event_store = Context::Users::Repository.new.create_user(auth_provider: auth_provider, name: Faker::Name.name, phone_number: 667089810, avatar_id: SecureRandom.uuid)
+      event_store = Context::Users::Repository.new.create_user(auth_provider: auth_provider, name: Faker::Name.name, phone_number: 667089810, avatar_id: SecureRandom.uuid, gender: 0)
       expect(event_store).to have_published(an_event(UserWasCreated))
     end
   end
