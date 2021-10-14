@@ -31,7 +31,7 @@ module Mutations
       end
 
       let(:token) {
-        result = Mutations::SignInUserMutation.new(object: nil, field: nil, context: {session: {}}).resolve(credentials: {email: user.email, password: user.password})
+        result = Mutations::SignInUserMutation.new(object: nil, field: nil, context: { session: {} }).resolve(credentials: { email: user.email, password: user.password })
         result[:token]
       }
 
@@ -45,13 +45,13 @@ module Mutations
 
       describe ".mutation passes" do
         it "returns a true" do
-          result = FBoulderSchema.execute(query, variables: variables, context: {current_user: user})
+          result = FBoulderSchema.execute(query, variables: variables, context: { current_user: user })
         end
       end
 
       describe ".mutation does not pass" do
         it "not valid" do
-          expect { FBoulderSchema.execute(query, variables: not_valid_variables, context: {current_user: user}) }.to raise_error(ActiveRecord::RecordNotFound)
+          expect { FBoulderSchema.execute(query, variables: not_valid_variables, context: { current_user: user }) }.to raise_error(ActiveRecord::RecordNotFound)
         end
       end
 

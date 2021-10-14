@@ -2,7 +2,6 @@ module Context
   module Routes
     module Commands
       class UpdateRoute
-
         def call(event)
           stream = event.data
           route = stream[:adapter].where(name: stream[:id])

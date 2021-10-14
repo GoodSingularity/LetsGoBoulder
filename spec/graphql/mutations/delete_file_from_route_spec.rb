@@ -3,7 +3,7 @@ require "rails_helper"
 module Mutations
   module Routes
     RSpec.describe DeleteFileFromRouteMutation, type: :request do
-      let(:file){
+      let(:file) {
         file = fixture_file_upload(Rails.root.join("spec", "fixtures", "files", "image.jpg"), "image/jpg")
         config = {
           key: SecureRandom.uuid,
@@ -22,7 +22,7 @@ module Mutations
       end
 
       let(:variables) do
-        {id: route.id, fileId: file}
+        { id: route.id, fileId: file }
       end
 
       let(:user) {
@@ -35,7 +35,7 @@ module Mutations
       }
 
       let(:token) {
-        result = Mutations::SignInUserMutation.new(object: nil, field: nil, context: {session: {}}).resolve(credentials: {email: user.email, password: user.password})
+        result = Mutations::SignInUserMutation.new(object: nil, field: nil, context: { session: {} }).resolve(credentials: { email: user.email, password: user.password })
         result[:token]
       }
 
@@ -49,7 +49,7 @@ module Mutations
 
       describe ".mutation passes" do
         it "returns a true" do
-          result = FBoulderSchema.execute(query, variables: variables, context: {current_user: user})
+          result = FBoulderSchema.execute(query, variables: variables, context: { current_user: user })
           route.reload
           expect(route[:files].size).to eq 0
         end

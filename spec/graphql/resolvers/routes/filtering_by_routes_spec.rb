@@ -22,13 +22,13 @@ module Resolvers
         end
 
         it "filtering by routes" do
-          result = FBoulderSchema.execute(query, variables: {color: 1, routeSetter: user.name}, context: context)
+          result = FBoulderSchema.execute(query, variables: { color: 1, routeSetter: user.name }, context: context)
           size = result["data"]["filteringByRoutes"].size
           expect(size).to eq(1)
         end
 
         it "none found in filtering by routes" do
-          result = FBoulderSchema.execute(query, variables: {color: 0, routeSetter: user.name}, context: context)
+          result = FBoulderSchema.execute(query, variables: { color: 0, routeSetter: user.name }, context: context)
           size = result["data"]["filteringByRoutes"].size
           expect(size).to eq(0)
         end

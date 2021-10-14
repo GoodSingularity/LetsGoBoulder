@@ -2,7 +2,6 @@ module Context
   module Ascends
     module Commands
       class AddLikeToAscend
-
         def call(event)
           data = stream_data(event)
           ascend = data[:adapter].find data[:id]

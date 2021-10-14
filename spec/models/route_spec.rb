@@ -11,13 +11,12 @@ RSpec.describe Route, type: :model do
 
   context "when does return failure" do
     it "color is not ok" do
-      expect{
-	create(:route, 
-		name: Faker::Name.name, 
-		color: "XD", 
-		route_setter: Faker::Name.name
-	)
-	}.to raise_error(ActiveRecord::RecordInvalid)
+      expect {
+        create(:route,
+               name: Faker::Name.name,
+               color: "XD",
+               route_setter: Faker::Name.name)
+      }.to raise_error(ActiveRecord::RecordInvalid)
     end
   end
 end

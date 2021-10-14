@@ -4,12 +4,11 @@ module Mutations
 
     field :status, Boolean, null: false
 
-    def resolve(**args)      
+    def resolve(**args)
       Helpers::Authenticate.new.call(context: context)
       id = context[:current_user].id
       Context::Users::Repository.new.update(id: id, file: args[:file])
-      {status: 200}
+      { status: 200 }
     end
-
   end
 end

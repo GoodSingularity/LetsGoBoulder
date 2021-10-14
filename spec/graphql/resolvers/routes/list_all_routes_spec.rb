@@ -19,8 +19,8 @@ module Resolvers
         }
         it "shows all routes" do
           post = FBoulderSchema.execute(query, variables: {}, context: context)
-	  error = post["errors"].first["message"]
-	  expect(error).eql?("Route is not found")
+          error = post["errors"].first["message"]
+          expect(error).eql?("Route is not found")
         end
       end
 

@@ -2,7 +2,6 @@ module Context
   module Ascends
     module Commands
       class UnlikeAscend
-
         def call(event)
           stream = event.data
           ascend_id = stream[:ascend_id]

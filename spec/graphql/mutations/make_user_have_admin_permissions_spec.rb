@@ -9,7 +9,7 @@ module Mutations
           email: "test@test.com",
           password: "test",
           phone_number: 667089810,
-	  is_admin: true
+          is_admin: true
         )
       }
 
@@ -24,12 +24,12 @@ module Mutations
       }
 
       let(:not_valid_variables) do
-        {id: SecureRandom.uuid}
+        { id: SecureRandom.uuid }
       end
 
       describe ".mutation passes" do
         it "returns a true" do
-          result = FBoulderSchema.execute(query, variables: {id: user_to_be_updated.id}, context: {current_user: user})
+          result = FBoulderSchema.execute(query, variables: { id: user_to_be_updated.id }, context: { current_user: user })
           user_to_be_updated.reload
           expect(user_to_be_updated[:is_admin]).to eq true
         end

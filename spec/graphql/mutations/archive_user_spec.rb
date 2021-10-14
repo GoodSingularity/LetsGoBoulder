@@ -13,15 +13,15 @@ module Mutations
       }
 
       let(:variables) do
-        {id: user.id}
+        { id: user.id }
       end
 
       let(:not_valid_variables) do
-        {id: SecureRandom.uuid}
+        { id: SecureRandom.uuid }
       end
 
       let(:token) {
-        result = Mutations::SignInUserMutation.new(object: nil, field: nil, context: {session: {}}).resolve(credentials: {email: user.email, password: user.password})
+        result = Mutations::SignInUserMutation.new(object: nil, field: nil, context: { session: {} }).resolve(credentials: { email: user.email, password: user.password })
         result[:token]
       }
 
@@ -35,10 +35,10 @@ module Mutations
 
       describe ".mutation passes" do
         it "returns a true" do
-          result = FBoulderSchema.execute(query, variables: variables, context: {current_user: user})
+          result = FBoulderSchema.execute(query, variables: variables, context: { current_user: user })
           user.reload
           expect(user[:archive]).to eq true
-          output = FBoulderSchema.execute(query, variables: variables, context: {current_user: user})
+          output = FBoulderSchema.execute(query, variables: variables, context: { current_user: user })
           expect(output["errors"][0]["message"]).to eq("This user was archived")
         end
       end

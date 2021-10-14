@@ -28,14 +28,14 @@ module Resolvers
           }
         }
         it "shows no ascends" do
-          post = FBoulderSchema.execute(query, variables: {routeId: SecureRandom.uuid}, context: context)
+          post = FBoulderSchema.execute(query, variables: { routeId: SecureRandom.uuid }, context: context)
           size = post["data"]["listAscendsForRouteId"].size
           expect(size).to eq(0)
         end
 
         it "shows all ascends" do
           Ascend.create(route_id: route.id, user_id: user.id, likes: [user.id])
-          post = FBoulderSchema.execute(query, variables: {routeId: route.id}, context: context)
+          post = FBoulderSchema.execute(query, variables: { routeId: route.id }, context: context)
           size = post["data"]["listAscendsForRouteId"].size
           expect(size).to eq(1)
         end

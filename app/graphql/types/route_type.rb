@@ -9,16 +9,17 @@ module Types
 
     def files
       array = []
-      object.files.each{|file| data= $s3.get_object(bucket: 'routes', key: file)
+      object.files.each { |file|
+        data = $s3.get_object(bucket: 'routes', key: file)
         array.push(
           {
             id: data.etag[1..-2],
             last_modified: data.last_modified,
-            size: data.content_length.to_s + ' ' + data. accept_ranges.to_s
-           }
-         )
-       }
-       array
+            size: data.content_length.to_s + ' ' + data.accept_ranges.to_s
+          }
+        )
+      }
+      array
     end
 
     def creator

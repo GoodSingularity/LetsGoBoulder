@@ -19,12 +19,12 @@ module Resolvers
     private
 
     def return_color_id(name)
-      levels = {black: 0,
-                blue: 1,
-                green: 2,
-                orange: 3,
-                yellow: 4,
-                white: 5}.with_indifferent_access
+      levels = { black: 0,
+                 blue: 1,
+                 green: 2,
+                 orange: 3,
+                 yellow: 4,
+                 white: 5 }.with_indifferent_access
 
       levels[name]
     end
