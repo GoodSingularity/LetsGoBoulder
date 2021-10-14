@@ -8,7 +8,7 @@ module Mutations
       end
 
       let(:variables) do
-        {id: route.name, color: 2, status: false}
+        { id: route.name, color: 2, status: false }
       end
 
       let(:user) {
@@ -21,7 +21,7 @@ module Mutations
       }
 
       let(:token) {
-        result = Mutations::SignInUserMutation.new(object: nil, field: nil, context: {session: {}}).resolve(credentials: {email: user.email, password: user.password})
+        result = Mutations::SignInUserMutation.new(object: nil, field: nil, context: { session: {} }).resolve(credentials: { email: user.email, password: user.password })
         result[:token]
       }
 
@@ -35,7 +35,7 @@ module Mutations
 
       describe ".mutation passes" do
         it "returns a true" do
-          result = FBoulderSchema.execute(query, variables: variables, context: {current_user: user})
+          result = FBoulderSchema.execute(query, variables: variables, context: { current_user: user })
           route.reload
           expect(route[:color]).to eq 2
         end

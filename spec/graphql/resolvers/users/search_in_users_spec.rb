@@ -19,7 +19,7 @@ module Resolvers
 
       describe ".resolve not found" do
         it "search in users" do
-          result = FBoulderSchema.execute(query, variables: {search: ""}, context: context)
+          result = FBoulderSchema.execute(query, variables: { search: "" }, context: context)
           size = result["data"]["searchInUsers"].size
           expect(size).to eq(0)
         end
@@ -27,14 +27,14 @@ module Resolvers
 
       describe ".resolve found" do
         it "search in users through name" do
-          result = FBoulderSchema.execute(query, variables: {search: user.name}, context: context)
+          result = FBoulderSchema.execute(query, variables: { search: user.name }, context: context)
           size = result["data"]["searchInUsers"].size
           expect(size).to_not eq(0)
           expect(result["data"]["searchInUsers"][0]["name"]).to eq(user.name)
         end
 
         it "search in users through email" do
-          result = FBoulderSchema.execute(query, variables: {search: user.email}, context: context)
+          result = FBoulderSchema.execute(query, variables: { search: user.email }, context: context)
           size = result["data"]["searchInUsers"].size
           expect(size).to_not eq(0)
           expect(result["data"]["searchInUsers"][0]["email"]).to eq(user.email)

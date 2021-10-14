@@ -9,31 +9,31 @@ module Context
 
       def create(args:, file_key:)
         event = RouteWasCreated.new(data: {
-          adapter: @adapter,
-          color: args[:color],
-          route_setter: args[:route_setter],
-          files: [file_key],
-          status: true
-        })
+                                      adapter: @adapter,
+                                      color: args[:color],
+                                      route_setter: args[:route_setter],
+                                      files: [file_key],
+                                      status: true
+                                    })
         $event_store.publish(event, stream_name: SecureRandom.uuid)
       end
 
       def delete(args:)
         event = FileWasDeletedFromRoute.new(data: {
-          adapter: @adapter,
-          id: args[:id],
-          file_key: args[:file_id]
-        })
+                                              adapter: @adapter,
+                                              id: args[:id],
+                                              file_key: args[:file_id]
+                                            })
         $event_store.publish(event, stream_name: SecureRandom.uuid)
       end
 
       def update(args:)
         event = RouteWasUpdated.new(data: {
-          adapter: @adapter,
-          id: args[:id],
-          color: args[:color],
-          status: args[:status]
-        })
+                                      adapter: @adapter,
+                                      id: args[:id],
+                                      color: args[:color],
+                                      status: args[:status]
+                                    })
         $event_store.publish(event, stream_name: SecureRandom.uuid)
       end
 

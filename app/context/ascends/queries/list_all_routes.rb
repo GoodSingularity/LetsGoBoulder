@@ -2,9 +2,8 @@ module Context
   module Ascends
     module Queries
       class ListAllAscends
-
         def call
-          route=Ascend.all
+          route = Ascend.all
         end
       end
     end

@@ -8,7 +8,7 @@ module Mutations
       user ||= User.find(args[:id])
       Helpers::AuthenticateIsAdmin.new.call(user: context[:current_user])
       user.update(is_admin: true)
-      {status: 200}
+      { status: 200 }
     end
   end
 end

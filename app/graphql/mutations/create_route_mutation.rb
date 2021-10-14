@@ -9,7 +9,7 @@ module Mutations
       Helpers::Authenticate.new.call(context: context)
       file_key = Context::Routes::Commands::PutFileToRoute.new.call(file: args[:file])
       Context::Routes::Repository.new.create(args: args, file_key: file_key)
-      {status: 200}
+      { status: 200 }
     end
   end
 end

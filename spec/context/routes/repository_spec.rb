@@ -5,9 +5,9 @@ RSpec.describe Context::Routes::Repository, type: :model do
   context "create method" do
     it "it success" do
       args = {
-	name: Faker::Name.name, 
-	color: 1, 
-	route_setter: "Kacper"
+        name: Faker::Name.name,
+        color: 1,
+        route_setter: "Kacper"
       }
       event_store = Context::Routes::Repository.new.create(args: args, file_key: SecureRandom.uuid)
       expect(event_store).to have_published(an_event(RouteWasCreated))
@@ -15,8 +15,8 @@ RSpec.describe Context::Routes::Repository, type: :model do
   end
 
   context "delete method" do
-    let(:route) { 
-	Route.create!(id: SecureRandom.uuid, color: 1, route_setter: "TesT", name: "XD", files: [SecureRandom.uuid])
+    let(:route) {
+      Route.create!(id: SecureRandom.uuid, color: 1, route_setter: "TesT", name: "XD", files: [SecureRandom.uuid])
     }
 
     it "it success" do
@@ -31,7 +31,7 @@ RSpec.describe Context::Routes::Repository, type: :model do
 
   context "update method" do
     let(:route) {
-        Route.create!(id: SecureRandom.uuid, color: 1, route_setter: Faker::Name.name, name: Faker::Name.name)
+      Route.create!(id: SecureRandom.uuid, color: 1, route_setter: Faker::Name.name, name: Faker::Name.name)
     }
 
     it "it success" do

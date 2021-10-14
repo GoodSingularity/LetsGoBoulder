@@ -2,7 +2,6 @@ module Context
   module Users
     module Queries
       class SignInUser
-
         def call(credentials:, context:)
           # basic validation
           return unless credentials
@@ -19,12 +18,12 @@ module Context
           context[:session][:token] = token
           if Rails.env != "test"
             $twilio.messages.create(
-             body: 'Login: ' + token,
-             from: ENV['TWILIO_PHONE_NUMBER'],
-             to: '+48'+user.phone_number.to_s
+              body: 'Login: ' + token,
+              from: ENV['TWILIO_PHONE_NUMBER'],
+              to: '+48' + user.phone_number.to_s
             )
           end
-          {user: user, token: token}
+          { user: user, token: token }
         end
       end
     end

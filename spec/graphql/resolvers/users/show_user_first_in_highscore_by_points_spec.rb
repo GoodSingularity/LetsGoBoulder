@@ -34,7 +34,7 @@ module Resolvers
             phone_number: 667089810,
             points: 1
           )
-          result = FBoulderSchema.execute(query, variables: {search: user.name}, context: context)
+          result = FBoulderSchema.execute(query, variables: { search: user.name }, context: context)
           size = result["data"]["firstUserInHighScoreByPoints"].size
           expect(size).to_not eq(0)
           expect(result["data"]["firstUserInHighScoreByPoints"]["points"]).to eq(10)

@@ -22,7 +22,6 @@ module Types
       likes.as_json["batch_loader"].size
     end
 
-
     def user
       BatchLoader::GraphQL.for(object.user_id).batch(default_value: nil) do |user_ids, loader|
         User.where(id: user_ids).each { |user| loader.call(user.id, user) }
@@ -30,7 +29,7 @@ module Types
     end
 
     def route
-      BatchLoader::GraphQL.for(object.route_id).batch(default_value: nil)  do |route_ids, loader|
+      BatchLoader::GraphQL.for(object.route_id).batch(default_value: nil) do |route_ids, loader|
         Route.where(id: route_ids).each { |route| loader.call(route.id, route) }
       end
     end

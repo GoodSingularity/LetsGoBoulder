@@ -19,7 +19,7 @@ module Resolvers
 
       describe ".resolve not found" do
         it "search in routes" do
-          result = FBoulderSchema.execute(query, variables: {search: "XD"}, context: context)
+          result = FBoulderSchema.execute(query, variables: { search: "XD" }, context: context)
           size = result["data"]["searchInRoutes"].size
           expect(size).to eq(0)
         end
@@ -31,7 +31,7 @@ module Resolvers
         end
 
         it "search in routes" do
-          result = FBoulderSchema.execute(query, variables: {search: "test"}, context: context)
+          result = FBoulderSchema.execute(query, variables: { search: "test" }, context: context)
           size = result["data"]["searchInRoutes"].size
           expect(size).to_not eq(0)
         end

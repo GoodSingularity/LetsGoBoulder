@@ -1384,6 +1384,12 @@ GEM
     rubocop-performance (1.11.5)
       rubocop (>= 1.7.0, < 2.0)
       rubocop-ast (>= 0.4.0)
+    rubocop-rails (2.12.3)
+      activesupport (>= 4.2.0)
+      rack (>= 1.1)
+      rubocop (>= 1.7.0, < 2.0)
+    rubocop-rspec (2.5.0)
+      rubocop (~> 1.19)
     ruby-progressbar (1.11.0)
     ruby2_keywords (0.0.5)
     ruby_event_store (2.3.0)
@@ -1452,6 +1458,10 @@ DEPENDENCIES
   rails (~> 6.1.4, >= 6.1.4.1)
   rails_event_store
   rspec-rails (~> 5.0.0)
+  rubocop
+  rubocop-performance
+  rubocop-rails
+  rubocop-rspec
   ruby_event_store-rspec
   simplecov
   spring

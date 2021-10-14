@@ -2,7 +2,6 @@ module Context
   module Users
     module Commands
       class PutFileToUser
-
         def call(file:)
           File.extname(file.path) != ".jpg" ? (raise GraphQL::ExecutionError, "This file is not extension valid") : nil
           file_key = SecureRandom.uuid
