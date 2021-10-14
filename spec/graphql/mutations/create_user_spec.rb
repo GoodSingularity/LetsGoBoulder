@@ -23,7 +23,8 @@ RSpec.describe Mutations::CreateUserMutation, type: :request do
         name: "Test User",
         phone_number: 667089810,
         auth_provider: auth_provider,
-        file: file
+        file: file,
+        gender: 0
       )
       assert user.persisted?
       assert_equal user.name, "Test User"
