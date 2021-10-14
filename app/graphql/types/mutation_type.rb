@@ -11,5 +11,6 @@ module Types
     field :create_ascend, mutation: Mutations::CreateAscendMutation
     field :delete_file_from_route_mutation, mutation: Mutations::DeleteFileFromRouteMutation
     field :update_user_profile_image, mutation: Mutations::UpdateUserProfileImageMutation
+    field :make_user_have_admin_permissions, mutation: Mutations::MakeUserHaveAdminPermissionsMutation
   end
 end
