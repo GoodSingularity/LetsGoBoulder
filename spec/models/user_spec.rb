@@ -4,8 +4,8 @@ require "faker"
 RSpec.describe User, type: :model do
   context "when passes sucessful" do
     it "parrams ok" do
-      route = create(:user, name: Faker::Name.name, email: Faker::Internet.email, password_digest: Faker::Internet.password, id: SecureRandom.uuid, points: 0, avatar_id: nil, is_admin: false)
-      expect(route).to be_valid
+      user = create(:user, name: Faker::Name.name, email: Faker::Internet.email, password_digest: Faker::Internet.password, id: SecureRandom.uuid, points: 0, avatar_id: nil, is_admin: false)
+      expect(user).to be_valid
     end
   end
 
