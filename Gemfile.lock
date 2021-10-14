@@ -1237,6 +1237,8 @@ GEM
     diff-lcs (1.4.4)
     docile (1.4.0)
     erubi (1.10.0)
+    factory_bot (6.2.0)
+      activesupport (>= 5.0.0)
     faraday (1.8.0)
       faraday-em_http (~> 1.0)
       faraday-em_synchrony (~> 1.0)
@@ -1439,6 +1441,7 @@ DEPENDENCIES
   bcrypt (~> 3.1.13)
   bootsnap (>= 1.4.4)
   byebug
+  factory_bot
   faker!
   graphql
   listen (~> 3.3)

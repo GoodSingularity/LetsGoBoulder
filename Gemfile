@@ -14,6 +14,7 @@ gem "puma", "~> 5.0"
 gem 'batch-loader'
 gem "pg_search"
 gem "graphql"
+gem 'factory_bot'
 gem "aws-sdk"
 gem "rails_event_store"
 gem "apollo_upload_server", "2.1.0"
