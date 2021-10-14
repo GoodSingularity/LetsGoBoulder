@@ -4,7 +4,8 @@ module Context
       class ListAllRoutes
 
         def call
-          route=Route.all
+          route ||= Route.all
+	  raise Context::Routes::Errors::RouteNotFoundError if route == []
         end
       end
     end
