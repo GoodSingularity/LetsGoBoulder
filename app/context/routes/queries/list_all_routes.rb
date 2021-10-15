@@ -5,6 +5,8 @@ module Context
         def call
           route ||= Route.all
           raise Context::Routes::Errors::RouteNotFoundError if route == []
+
+          route
         end
       end
     end
