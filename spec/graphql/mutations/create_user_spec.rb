@@ -29,7 +29,7 @@ RSpec.describe Mutations::CreateUserMutation, type: :request do
       assert user.persisted?
       assert_equal user.name, "Test User"
       assert_equal user.email, email
-      expect { $s3.get_object(bucket: "avatars", key: user.avatar_id) }.to_not raise_error(Aws::S3::Errors::NoSuchKey)
+      expect { $s3.get_object(bucket: "avatars", key: user.avatar_id) }.to_not raise_error
       $s3.delete_object(key: user.avatar_id, bucket: "avatars")
     end
   end
