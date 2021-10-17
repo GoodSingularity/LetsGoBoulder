@@ -6,7 +6,7 @@ module Context
       RSpec.describe DetailsOfCurrentUser, type: :request do
         describe "Testing Query DetailsOfCurrentUser in Users Context" do
           it "has none routes" do
-            expect { Context::Users::Queries::DetailsOfCurrentUser.new.call(id: SecureRandom.uuid) }.to raise_error
+            expect { Context::Users::Queries::DetailsOfCurrentUser.new.call(id: SecureRandom.uuid) }.to raise_error(ActiveRecord::RecordNotFound)
           end
         end
         describe "Testing Query ListAllRoutes in Routes Context" do
