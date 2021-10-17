@@ -17,6 +17,7 @@ gem "aws-sdk"
 gem "batch-loader"
 gem "graphql"
 gem "pg_search"
+gem 'search_object_graphql'
 gem "puma", "~> 5.0"
 gem "rails_event_store"
 gem "rubocop"

@@ -21,19 +21,13 @@ module Resolvers
         it "search in routes" do
           result = FBoulderSchema.execute(query, variables: { search: "XD" }, context: context)
           error = result["errors"].first["message"]
-          expect(error).equal?("Route is not found")
+          expect(error).to eq("Route is not found")
         end
       end
 
       describe ".resolve found" do
         before do
-          create(:route,
-                 name: Faker::Name.name,
-                 color: 1,
-                 route_setter: "test")
-          create(:route,
-                 name: Faker::Name.name,
-                 color: 1)
+          Route.create(name: Faker::Name.name, color: 1, route_setter: "test")
         end
 
         it "search in routes" do
