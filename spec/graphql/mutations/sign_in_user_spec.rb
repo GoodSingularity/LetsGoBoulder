@@ -27,7 +27,7 @@ module Mutations
           end
         end
 
-        describe ".mutation failes" do
+        describe ".mutation fails" do
           let(:user) {
             User.create!(
               name: "Test User",
@@ -39,7 +39,6 @@ module Mutations
 
           it ".mutation does not pass, no credentials" do
             not_loged_in = Mutations::SignInUserMutation.new(object: nil, field: nil, context: { session: {} }).resolve(credentials: {})
-
             assert_nil not_loged_in
           end
 

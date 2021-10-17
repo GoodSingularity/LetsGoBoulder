@@ -3,7 +3,10 @@ module Context
     module Queries
       class SearchInUsers
         def call(search:)
-          User.search(search)
+          user = User.search(search)
+          raise Context::Users::Errors::UserNotFoundError unless user
+
+          user
         end
       end
     end
