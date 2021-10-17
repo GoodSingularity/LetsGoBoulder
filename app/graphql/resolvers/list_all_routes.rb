@@ -16,6 +16,13 @@ module Resolvers
       raise GraphQL::ExecutionError, error.message
     end
 
+    option(:paginate, type: Int) { |scope, value|
+      scope.limit(value)
+    }
+
+    option(:offset, type: Int) { |scope, value|
+      scope.offset(value)
+    }
     option(:search, type: String) { |scope, value|
       searching = value
       if %w[black blue green orange yellow white].include? searching.downcase
