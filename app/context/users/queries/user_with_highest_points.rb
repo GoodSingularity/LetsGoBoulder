@@ -3,7 +3,10 @@ module Context
     module Queries
       class UserWithHighestPoints
         def call
-          User.order('points desc')[0]
+          user = User.order('points desc')[0]
+          raise Context::Users::Errors::UserNotFoundError unless user
+
+          user
         end
       end
     end
