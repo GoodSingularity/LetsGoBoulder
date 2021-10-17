@@ -6,8 +6,7 @@ module Context
       RSpec.describe ListAllCurrentUserReactions, type: :request do
         describe "Testing Query ListAllCurrentUserReactions in Ascend Context" do
           it "has none reactions" do
-            user_reactions = Context::Ascends::Queries::ListAllCurrentUserReactions.new.call(id: SecureRandom.uuid)
-            expect(user_reactions.size).to equal(0)
+            expect { Context::Ascends::Queries::ListAllCurrentUserReactions.new.call(id: SecureRandom.uuid) }.to raise_error(Context::Ascends::Errors::AscendNotFoundError)
           end
         end
 

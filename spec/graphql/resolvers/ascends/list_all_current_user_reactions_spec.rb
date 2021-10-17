@@ -29,8 +29,8 @@ module Resolvers
         }
         it "shows no user reactions" do
           post = FBoulderSchema.execute(query, variables: {}, context: context)
-          size = post["data"]["listAllCurrentUserReactions"].size
-          expect(size).to eq(0)
+          errors = post["errors"].first
+          expect(errors["message"]).to eq("Ascend is not found")
         end
 
         it "shows all current user reactions " do

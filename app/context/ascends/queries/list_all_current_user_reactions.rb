@@ -3,7 +3,10 @@ module Context
     module Queries
       class ListAllCurrentUserReactions
         def call(id:)
-          Ascend.select { |ascend| ascend.likes.include?(id) }
+          ascends = Ascend.select { |ascend| ascend.likes.include?(id) }
+          raise Context::Ascends::Errors::AscendNotFoundError if ascends == []
+
+          ascends
         end
       end
     end

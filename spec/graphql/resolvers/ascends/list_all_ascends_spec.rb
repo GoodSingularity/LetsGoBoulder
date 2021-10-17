@@ -29,8 +29,8 @@ module Resolvers
         }
         it "shows no ascends" do
           post = FBoulderSchema.execute(query, variables: {}, context: context)
-          size = post["data"]["listAllAscends"].size
-          expect(size).to eq(0)
+          errors = post["errors"].first
+          expect(errors["message"]).to eq("Ascend is not found")
         end
 
         it "shows all ascends" do
