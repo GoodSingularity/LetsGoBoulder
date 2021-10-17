@@ -6,8 +6,7 @@ module Context
       RSpec.describe ListAllAscends, type: :request do
         describe "Testing Query ListAllAscends in Routes Context" do
           it "has none ascends" do
-            ascends = Context::Ascends::Queries::ListAllAscends.new.call
-            expect(ascends.size).to equal(0)
+            expect { Context::Ascends::Queries::ListAllAscends.new.call }.to raise_error(Context::Ascends::Errors::AscendNotFoundError)
           end
         end
 

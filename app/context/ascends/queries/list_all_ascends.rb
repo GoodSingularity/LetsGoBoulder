@@ -3,7 +3,10 @@ module Context
     module Queries
       class ListAllAscends
         def call
-          route = Ascend.all
+          ascend = Ascend.all
+          raise Context::Ascends::Errors::AscendNotFoundError if ascend == []
+
+          ascend
         end
       end
     end

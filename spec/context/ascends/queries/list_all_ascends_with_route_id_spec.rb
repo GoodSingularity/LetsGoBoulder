@@ -5,8 +5,7 @@ module Context
       RSpec.describe ListAllAscendsWithRouteId, type: :request do
         describe "Testing Query ListAllAscendsWithRouteId in Routes Context" do
           it "has none ascends" do
-            ascends = Context::Ascends::Queries::ListAllAscendsWithRouteId.new.call(route_id: SecureRandom.uuid)
-            expect(ascends.size).to equal(0)
+            expect { Context::Ascends::Queries::ListAllAscendsWithRouteId.new.call(route_id: SecureRandom.uuid) }.to raise_error(Context::Ascends::Errors::AscendNotFoundError)
           end
         end
 
