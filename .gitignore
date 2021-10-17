@@ -35,3 +35,6 @@
 
 # Ignore swap files
 *.swp
+
+# Ignore save files
+*.save
