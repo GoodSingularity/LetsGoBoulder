@@ -2,7 +2,7 @@ require "rails_helper"
 
 module Resolvers
   module Users
-    RSpec.describe SearchInRoutes, type: :request do
+    RSpec.describe SearchInUsers, type: :request do
       let(:user) {
         User.create!(
           name: "test",

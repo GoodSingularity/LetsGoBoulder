@@ -2,7 +2,7 @@ require "rails_helper"
 
 module Resolvers
   module Routes
-    RSpec.describe SearchInRoutes, type: :request do
+    RSpec.describe ListAllRoutes, type: :request do
       let(:user) {
         User.create!(
           name: "test",
@@ -20,19 +20,25 @@ module Resolvers
       describe ".resolve not found" do
         it "search in routes" do
           result = FBoulderSchema.execute(query, variables: { search: "XD" }, context: context)
-          size = result["data"]["searchInRoutes"].size
-          expect(size).to eq(0)
+          error = result["errors"].first["message"]
+          expect(error).equal?("Route is not found")
         end
       end
 
       describe ".resolve found" do
         before do
-          Route.create(name: Faker::Name.name, color: 1, route_setter: "test")
+          create(:route,
+                 name: Faker::Name.name,
+                 color: 1,
+                 route_setter: "test")
+          create(:route,
+                 name: Faker::Name.name,
+                 color: 1)
         end
 
         it "search in routes" do
           result = FBoulderSchema.execute(query, variables: { search: "test" }, context: context)
-          size = result["data"]["searchInRoutes"].size
+          size = result["data"]["listAllRoutes"].size
           expect(size).to_not eq(0)
         end
       end
@@ -40,7 +46,7 @@ module Resolvers
       def query
         <<~GQL
           query($search: String!){
-            searchInRoutes(search: $search){
+            listAllRoutes(search: $search){
               color
               name
               creator
