@@ -8,7 +8,7 @@ module Resolvers
 
     def resolve(**args)
       Helpers::Authenticate.new.call(context: context)
-      Context::Routes::Queries::FilteringByRoutes.new.call(args: args)
+      Contexts::Routes::Queries::FilteringByRoutes.new.call(args: args)
     rescue ActiveRecord::RecordNotFound => error
       raise GraphQL::ExecutionError, error.message
     end

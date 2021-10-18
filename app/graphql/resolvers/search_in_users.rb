@@ -8,7 +8,7 @@ module Resolvers
     def resolve(**args)
       Helpers::Authenticate.new.call(context: context)
       search = args[:search]
-      Context::Users::Queries::SearchInUsers.new.call(search: search)
+      Contexts::Users::Queries::SearchInUsers.new.call(search: search)
     rescue ActiveRecord::RecordNotFound => error
       raise GraphQL::ExecutionError, error.message
     end

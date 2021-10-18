@@ -7,7 +7,7 @@ module Mutations
     def resolve(**args)
       Helpers::Authenticate.new.call(context: context)
       id = context[:current_user].id
-      Context::Users::Repository.new.update(id: id, file: args[:file])
+      Contexts::Users::Repository.new.update(id: id, file: args[:file])
       { status: 200 }
     end
   end

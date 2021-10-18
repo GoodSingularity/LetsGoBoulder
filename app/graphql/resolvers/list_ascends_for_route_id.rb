@@ -6,7 +6,7 @@ module Resolvers
 
     def resolve(**args)
       Helpers::Authenticate.new.call(context: context)
-      Context::Ascends::Queries::ListAllAscendsWithRouteId.new.call(route_id: args[:route_id])
+      Contexts::Ascends::Queries::ListAllAscendsWithRouteId.new.call(route_id: args[:route_id])
     rescue ActiveRecord::RecordNotFound => error
       raise GraphQL::ExecutionError, error.message
     end

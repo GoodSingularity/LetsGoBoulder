@@ -6,7 +6,7 @@ module Mutations
     def resolve(**args)
       Helpers::Authenticate.new.call(context: context)
       current_user_id = context[:current_user].id
-      Context::Ascends::Repository.new.unlike(ascend_id: args[:id], current_user_id: current_user_id)
+      Contexts::Ascends::Repository.new.unlike(ascend_id: args[:id], current_user_id: current_user_id)
       { status: 200 }
     end
   end
