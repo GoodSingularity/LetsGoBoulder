@@ -36,10 +36,12 @@ module FBoulder
     # Middleware like session, flash, cookies can be added back manually.
     # Skip views, helpers and assets when generating a new resource.
     config.api_only = true
-    config.autoload = :classic
     config.middleware.use BatchLoader::Middleware
-    Dir[Rails.root.join('app/context/**/*.rb')].each { |rb| require rb }
-    Dir[Rails.root.join('app/context/**/events/*.rb')].each { |rb| require rb }
-    Dir[Rails.root.join('app/context/**/notifiers/*.rb')].each { |rb| require rb }
+    config.autoloader = :classic
+    # config.eager_load_paths += %W(#{Rails.root}/app/contexts/**)
+    # config.add_autoload_paths_to_load_path = false
+    config.eager_load_paths += Dir[Rails.root.join('app/contexts/**/*.rb')].each { |rb| require rb }
+    # config.eager_load_paths += Dir[Rails.root.join('app/contexts/**/events/*.rb')].each { |rb| require rb }
+    # config.eager_load_paths += Dir[Rails.root.join('app/contexts/**/notifiers/*.rb')].each { |rb| require rb }
   end
 end

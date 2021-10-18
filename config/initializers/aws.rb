@@ -1,9 +1,13 @@
 require "aws-sdk"
 
+endpoint = Rails.application.credentials.minio_endpoint
+user = Rails.application.credentials.minio_user
+password = Rails.application.credentials.minio_password
+
 Aws.config.update(
-  endpoint: "http://localhost:9000",
-  access_key_id: "minioadmin",
-  secret_access_key: "minioadmin",
+  endpoint: endpoint,
+  access_key_id: user,
+  secret_access_key: password,
   force_path_style: true,
   region: "us-east-1"
 )

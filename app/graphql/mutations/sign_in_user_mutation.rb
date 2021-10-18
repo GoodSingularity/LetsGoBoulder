@@ -8,7 +8,7 @@ module Mutations
     field :user, Types::UserType, null: true
 
     def resolve(credentials: nil)
-      Context::Users::Queries::SignInUser.new.call(credentials: credentials, context: context)
+      Contexts::Users::Queries::SignInUser.new.call(credentials: credentials, context: context)
     end
   end
 end

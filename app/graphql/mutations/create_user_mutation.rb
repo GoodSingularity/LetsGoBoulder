@@ -17,8 +17,8 @@ module Mutations
     field :status, Int, null: false
 
     def resolve(name: nil, phone_number: nil, auth_provider: nil, file: nil, gender: nil)
-      avatar_id = Context::Users::Commands::PutFileToUser.new.call(file: file)
-      user = Context::Users::Repository.new.create_user(auth_provider: auth_provider, name: name, phone_number: phone_number, avatar_id: avatar_id, gender: gender)
+      avatar_id = Contexts::Users::Commands::PutFileToUser.new.call(file: file)
+      user = Contexts::Users::Repository.new.create_user(auth_provider: auth_provider, name: name, phone_number: phone_number, avatar_id: avatar_id, gender: gender)
       User.where(email: auth_provider[:credentials][:email]).first
     end
   end
