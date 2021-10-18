@@ -38,8 +38,8 @@ module FBoulder
     config.api_only = true
     config.autoload = :classic
     config.middleware.use BatchLoader::Middleware
-    Dir[Rails.root.join('app/context/**/*.rb')].each { |rb| require rb }
-    Dir[Rails.root.join('app/context/**/events/*.rb')].each { |rb| require rb }
-    Dir[Rails.root.join('app/context/**/notifiers/*.rb')].each { |rb| require rb }
+    config.eager_load_paths += Dir[Rails.root.join('app/context/**/*.rb')].each { |rb| require rb }
+    config.eager_load_paths += Dir[Rails.root.join('app/context/**/events/*.rb')].each { |rb| require rb }
+    config.eager_load_paths += Dir[Rails.root.join('app/context/**/notifiers/*.rb')].each { |rb| require rb }
   end
 end
