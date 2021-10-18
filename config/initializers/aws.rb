@@ -1,7 +1,7 @@
 require "aws-sdk"
 
 Aws.config.update(
-  endpoint: "http://localhost:9000",
+  endpoint: ENV["MINIO_ENDPOINT"],
   access_key_id: "minioadmin",
   secret_access_key: "minioadmin",
   force_path_style: true,
