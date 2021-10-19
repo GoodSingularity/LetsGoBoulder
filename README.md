@@ -66,5 +66,12 @@ Explanation:
 - Climbing route has its level and name.
 
 
+Deployed to Heroku!:
+- https://letsgoboulder.herokuapp.com/
+Minio Server was deployed as another Heroku project.
 
-To do
+There are gonna be some examples how to use it.
+
+
+I'm planning to use this API in https://github.com/GoodSingularity/LetsGoBoulder_frontend
+The frontend is gonna be written in ReactNative as mobile app. Enjoy.
