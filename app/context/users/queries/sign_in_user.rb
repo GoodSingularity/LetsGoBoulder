@@ -16,13 +16,6 @@ module Context
           crypt = ActiveSupport::MessageEncryptor.new(Rails.application.credentials.secret_key_base.byteslice(0..31))
           token = crypt.encrypt_and_sign("user-id:#{user.id}")
           context[:session][:token] = token
-          if Rails.env != "test"
-            $twilio.messages.create(
-              body: 'Login: ' + token,
-              from: ENV['TWILIO_PHONE_NUMBER'],
-              to: '+48' + user.phone_number.to_s
-            )
-          end
           { user: user, token: token }
         end
       end
