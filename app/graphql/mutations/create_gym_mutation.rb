@@ -6,7 +6,6 @@ module Mutations
 
     def resolve(**args)
       Helpers::Authenticate.new.call(context: context)
-      binding.pry
       Contexts::Gyms::Repository.new.create_gym(args: args)
 
       { status: 200 }
