@@ -7,7 +7,7 @@ module Contexts
           args = stream[:args]
           current_user ||= User.find(args[:current_user_id])
 
-          gym ||= Route.find(args[:gym_id])
+          gym ||= Gym.find(args[:gym_id])
           reservations ||= Reservation.where(starts_at: args[:starts_at])
 
           if gym.volume > reservations.length
