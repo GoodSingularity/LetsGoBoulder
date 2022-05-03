@@ -3,15 +3,14 @@ module Contexts
     module Commands
       class AddNewReservation
         def call(event)
-          stream = event.data
-          args = stream[:args]
+          args = event.data
           current_user ||= User.find(args[:current_user_id])
 
           gym ||= Gym.find(args[:gym_id])
           reservations ||= Reservation.where(starts_at: args[:starts_at])
 
           if gym.volume > reservations.length
-            stream[:adapter].create(
+            args[:adapter].create(
               user_id: args[:current_user_id],
               gym_id: args[:gym_id],
               starts_at: args[:starts_at],
