@@ -10,7 +10,7 @@ module Contexts
           end
         end
 
-        describe "Testing Query ListAllCurrentUserReactions in Reservation Context" do
+        describe "Testing Query ListAllCurrentUserReservations in Reservation Context" do
           let(:user_id) { SecureRandom.uuid }
           let(:gym_id) { SecureRandom.uuid }
           let(:starts_at) { Faker::Time.between(from: 2.days.ago, to: Time.now) }

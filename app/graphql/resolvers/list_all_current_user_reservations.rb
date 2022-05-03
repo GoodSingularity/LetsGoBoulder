@@ -2,7 +2,7 @@ module Resolvers
   class ListAllCurrentUserReservations < GraphQL::Schema::Resolver
     description "list all current user reservations"
 
-    type [Types::AscendType], null: false
+    type [Types::ReservationType], null: false
 
     def resolve
       Helpers::Authenticate.new.call(context: context)
