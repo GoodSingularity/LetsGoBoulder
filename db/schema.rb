@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_03_31_225660) do
+ActiveRecord::Schema.define(version: 2022_05_06_225660) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -48,7 +48,7 @@ ActiveRecord::Schema.define(version: 2022_03_31_225660) do
     t.index ["stream", "position"], name: "index_event_store_events_in_streams_on_stream_and_position", unique: true
   end
 
-  create_table "gyms", force: :cascade do |t|
+  create_table "gyms", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "name"
     t.integer "volume"
     t.datetime "created_at", precision: 6, null: false
