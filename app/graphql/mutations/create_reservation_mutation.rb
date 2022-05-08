@@ -6,7 +6,6 @@ module Mutations
 
     def resolve(**args)
       Helpers::Authenticate.new.call(context: context)
-      
       Contexts::Reservations::Repository.new.add_reservation(
         current_user_id: context[:current_user].id,
         gym_id: args[:gym_id],
@@ -14,6 +13,8 @@ module Mutations
       )
 
       { status: 200 }
+    rescue Contexts::Gyms::Errors::GymNotFoundError => e
+      GraphQL::ExecutionError.new("Contexts::Gyms::Errors::GymNotFoundError")
     end
   end
 end

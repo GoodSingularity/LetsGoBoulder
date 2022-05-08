@@ -5,8 +5,10 @@ module Contexts
         def call(event)
           args = event.data
           current_user ||= User.find(args[:current_user_id])
-
           gym ||= Gym.find(args[:gym_id])
+          raise ActiveRecord::RecordNotFound if gym == nil
+          rescue ActiveRecord::RecordNotFound => e
+            raise Contexts::Gyms::Errors::GymNotFoundError
           reservations ||= Reservation.where(starts_at: args[:starts_at])
 
           if gym.volume > reservations.length
