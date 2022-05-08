@@ -9,4 +9,6 @@ Rails.configuration.to_prepare do
   $event_store.subscribe(Contexts::Ascends::Commands::UnlikeAscend.new, to: [AscendWasUnliked])
   $event_store.subscribe(Contexts::Users::Commands::CreateSingleUser.new, to: [UserWasCreated])
   $event_store.subscribe(Contexts::Users::Commands::UpdateUserProfileImage.new, to: [UserProfileImageWasUpdated])
+  $event_store.subscribe(Contexts::Reservations::Commands::AddNewReservation.new, to: [ReservationWasAdded])
+  $event_store.subscribe(Contexts::Gyms::Commands::AddNewGym.new, to: [GymWasAdded])
 end
