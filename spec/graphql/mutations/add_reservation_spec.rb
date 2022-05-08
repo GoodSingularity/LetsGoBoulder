@@ -32,6 +32,13 @@ module Mutations
         }
       end
 
+      let(:not_valid_variables_2) do
+        {
+          gymId: gym.id,
+          startsAt: "12.02.2021"
+        }
+      end
+
       let(:token) {
         result = Mutations::SignInUserMutation.new(object: nil, field: nil, context: { session: {} }).resolve(credentials: { email: user.email, password: user.password })
         result[:token]
@@ -56,6 +63,11 @@ module Mutations
         it "not valid" do
           result = FBoulderSchema.execute(query, variables: not_valid_variables, context: { current_user: user })
           expect(result["errors"][0]["message"]).to eq "Contexts::Gyms::Errors::GymNotFoundError"
+        end
+
+        it "not valid startsAt argument" do
+          result = FBoulderSchema.execute(query, variables: not_valid_variables_2, context: { current_user: user })
+          expect(result["errors"][0]["message"]).to eq "Variable $startsAt of type ISO8601Date! was provided invalid value"
         end
       end
 
